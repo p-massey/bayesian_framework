@@ -7,17 +7,18 @@ import random
 
 def parse_snid_file(filename):
     """
-    Parses a SNID output file to extract all ages and rlap values
+    Parses a SNID output file to extract all ages, rlaps, and redshifts
     until the rlap cutoff is reached.
 
     Args:
         filename (str): The path to the SNID output file.
 
     Returns:
-        tuple: (list of all ages, list of all rlaps) or (None, None) if parsing fails.
+        tuple: (list of ages, list of rlaps, list of redshifts) or (None, None, None) if parsing fails.
     """
     ages = []
     rlaps = []
+    redshifts = []
     in_rlap_section = False
 
     try:
@@ -40,20 +41,22 @@ def parse_snid_file(filename):
                         try:
                             age = float(parts[7])
                             rlap = float(parts[4])
+                            z = float(parts[5])
                             ages.append(age)
                             rlaps.append(rlap)
+                            redshifts.append(z)
                         except (IndexError, ValueError) as e:
                             print(f"Could not parse line in {os.path.basename(filename)}: {line}\nError: {e}")
                             continue
 
     except FileNotFoundError:
         print(f"Error: The file '{filename}' was not found.")
-        return None, None
+        return None, None, None
     except Exception as e:
         print(f"An unexpected error occurred while reading {filename}: {e}")
-        return None, None
+        return None, None, None
 
-    return (ages, rlaps) if ages else (None, None)
+    return (ages, rlaps, redshifts) if ages else (None, None, None)
 
 
 def calculate_simple_mean(ages, rlaps, top_n=20):
@@ -230,3 +233,104 @@ def save_results(results, output_file='cfa_SNID_age_results_concatenated.csv'):
                     f'{bs_mean if bs_mean is not None else -1.00:.2f},'
                     f'{bs_std if bs_std is not None else -1.00:.2f}\n')
 
+def extract_spec_name(fn):
+    fn = fn.lower()
+    if fn.startswith('snf'):
+        # For snf20080514-002-20080528..., we want the first 2 parts
+        parts = fn.split('-')
+        return f"{parts[0]}-{parts[1]}"
+    else:
+        # For sn2008bf-20080415..., we just want the first part
+        return fn.split('-')[0]
+
+def normalize_param_name(name):
+    name = str(name).lower()
+    return name if name.startswith('sn') else f"sn{name}"
+
+def calculate_sn_ages(params_file, spectra_mjd_file, output_file):
+    try:
+        # --- 1. Load Parameters ---
+        params = pd.read_csv(
+            params_file, comment='#', delim_whitespace=True, header=None,
+            usecols=[0, 1, 2, 3], names=['SN_name', 'zhel', 'mjd_max', 'mjd_max_err']
+        )
+
+        params['join_key'] = params['SN_name'].apply(normalize_param_name)
+
+        # KEY CHANGE: Create a mask for valid dates instead of dropping rows
+        # This keeps the SN_name available for the merge even if math isn't possible
+        params['is_valid_mjd'] = params['mjd_max'] < 99990
+
+        # --- 2. Load Spectra ---
+        spectra = pd.read_csv(
+            spectra_mjd_file, comment='#', delim_whitespace=True,
+            header=None, names=['filename', 'mjd_obs']
+        )
+        spectra['join_key'] = spectra['filename'].apply(extract_spec_name)
+
+        # --- 3. Merge and Calculate ---
+        df = pd.merge(spectra, params, on='join_key', how='left')
+
+        # Rest-frame age: (t_obs - t_max) / (1 + z)
+        # Using .where ensures we only calculate for rows with valid MJD data
+        mask = df['is_valid_mjd'] == True
+        df.loc[mask, 'Age'] = (df['mjd_obs'] - df['mjd_max']) / (1 + df['zhel'])
+        df.loc[mask, 'Age_Unc'] = df['mjd_max_err'] / (1 + df['zhel'])
+
+        # --- 4. Final Export ---
+        output_df = df[['filename', 'SN_name', 'Age', 'Age_Unc', 'zhel']].copy()
+        output_df.columns = ["Filename", "SN_Name", "Age_(days)", "Age_Unc_(days)", "redshift"]
+
+        # Ensure SN_Name isn't lost if the merge worked but Age didn't
+        output_df.to_csv(output_file, index=False)
+
+        print(f"Processed {len(output_df)} spectra. Results saved to {output_file}")
+
+        return output_df
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+
+def find_sn_subtypes(spectra_file, classification_file, scheme):
+    try:
+        scheme = scheme.lower()
+        target_col = 5 if scheme == 'branch' else 6
+        if scheme not in ['branch', 'wang']:
+            raise ValueError("Scheme must be 'branch' or 'wang'")
+
+        # 1. Load Classification Table
+        # We name this 'subtypes' to avoid confusion
+        subtypes = pd.read_csv(
+            classification_file,
+            comment='#',
+            delim_whitespace=True,
+            header=None,
+            usecols=[0, target_col],
+            names=['SN_Name', 'Subtype']
+        )
+        # Create the join key here to match the spectra
+        subtypes['join_key'] = subtypes['SN_Name'].apply(normalize_param_name)
+
+        # 2. Load Spectra File
+        spectra = pd.read_csv(
+            spectra_file, comment='#', delim_whitespace=True,
+            header=None, usecols=[0], names=['Filename']
+        )
+        # Create the matching join key
+        spectra['join_key'] = spectra['Filename'].apply(extract_spec_name)
+
+        # 3. Merge
+        # We use 'left' to keep all spectra even if they don't have a subtype
+        final_df = pd.merge(spectra, subtypes[['join_key', 'Subtype']], on='join_key', how='left')
+
+        # Cleanup: rename join_key to SN_Name for the final output
+        final_df = final_df.rename(columns={'join_key': 'SN_Name'})
+
+        print(f"Successfully matched {len(final_df)} spectra to {scheme} subtypes.")
+        return final_df[['Filename', 'SN_Name', 'Subtype']]
+
+    except Exception as e:
+        print(f"Error in find_sn_subtypes: {e}")
+        return None

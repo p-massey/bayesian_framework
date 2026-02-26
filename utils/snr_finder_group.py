@@ -4,7 +4,37 @@ import os
 import re
 import csv
 import argparse
+import pandas as pd
 
+
+def der_snr(flux):
+    """
+    Calculates the SNR of a spectrum using the DER_SNR algorithm.
+    Reference: Stoehr et al. 2008, "DER_SNR: A Robust SNR Estimator"
+
+    Args:
+        flux (np.ndarray): The flux values of the spectrum.
+
+    Returns:
+        float: The calculated SNR.
+    """
+    # Remove NaNs and zeros
+    flux = flux[np.isfinite(flux)]
+    flux = flux[flux != 0]
+
+    if len(flux) < 5:
+        return 0.0
+
+    # Calculate noise using the median of absolute differences
+    # Noise = 1.2848 * median(|2*f_i - f_{i-1} - f_{i+1}|) / sqrt(6)
+    noise = 1.2848 * np.median(np.abs(2.0 * flux[1:-1] - flux[0:-2] - flux[2:])) / np.sqrt(6.0)
+
+    # Signal is the median flux
+    signal = np.median(flux)
+
+    if noise > 0:
+        return signal / noise
+    return 0.0
 
 # --- Helper functions (Unchanged) ---
 def extract_sn_name(spectrum_file):
@@ -235,6 +265,66 @@ def analyze_spectrum(spectrum_file, params_file, make_plot=False, plot_dir="snr_
         "spectrum_file": os.path.basename(spectrum_file),
     }
 
+def analyze_spectrum_dersnr(spectrum_file, params_file, make_plot=False, plot_dir="snr_plots"):
+    """
+    Performs the fully adaptive S/N calculation for a single spectrum.
+
+    This function is designed to be called in a loop. It returns its results
+    as a dictionary for easy collection and CSV writing.
+
+    Args:
+        spectrum_file (str): Path to the spectrum data file.
+        params_file (str): Path to the supernova parameters file.
+        make_plot (bool): If True, generate and save a diagnostic plot.
+        plot_dir (str): Directory where plots will be saved.
+
+    Returns:
+        dict or None: A dictionary with the results, or None if analysis fails.
+    """
+    # --- Load Data and Get Redshift ---
+    try:
+        # usecols=(0,1) forces it to only read wavelength and flux
+        # invalid_raise=False skips messy footer lines
+        data = np.genfromtxt(spectrum_file, usecols=(0, 1), unpack=True, invalid_raise=False)
+        wavelength, flux = data[0], data[1]
+    except Exception as e:
+        print(f"  > Error loading {os.path.basename(spectrum_file)}: {e}")
+        return None
+
+    sn_name = extract_sn_name(spectrum_file)
+    if not sn_name:
+        print(f"  > Could not extract a valid SN name from '{os.path.basename(spectrum_file)}'. Skipping.")
+        return None
+
+    redshift = get_redshift(sn_name, params_file)
+    if redshift is None:
+        print(f"  > Could not find redshift for SN {sn_name}. Skipping.")
+        return None
+
+    flux = flux[np.isfinite(flux)]
+    flux = flux[flux != 0]
+
+    if len(flux) < 5:
+        return 0.0
+
+    # Calculate noise using the median of absolute differences
+    # Noise = 1.2848 * median(|2*f_i - f_{i-1} - f_{i+1}|) / sqrt(6)
+    noise = 1.2848 * np.median(np.abs(2.0 * flux[1:-1] - flux[0:-2] - flux[2:])) / np.sqrt(6.0)
+
+    # Signal is the median flux
+    signal = np.median(flux)
+
+
+    snr = signal / noise if noise > 0 else float('inf')
+
+
+    # --- Return Results as a Dictionary ---
+    return {
+        "sn_name": sn_name,
+        "snr": f"{snr:.2f}",
+        "redshift": f"{redshift:.5f}",
+        "spectrum_file": os.path.basename(spectrum_file),
+    }
 
 # --- Main Function to Process a Directory ---
 def process_directory(spectra_dir, params_file, output_csv, plot_each):
@@ -279,3 +369,29 @@ def process_directory(spectra_dir, params_file, output_csv, plot_each):
         print(f"\n❌ Error writing to CSV file: {e}")
 
 
+
+def find_snr(spectra_dir, params_file):
+    """
+    Calculates SNR using the DER_SNR method.
+    Matches filenames and SN names for easy joining.
+    """
+    results = []
+
+
+    print(f"Running DER_SNR analysis...")
+
+    for entry in os.scandir(spectra_dir):
+        if entry.is_file() and entry.name.endswith('.flm'):
+            # Call your function to do the heavy lifting
+            data_out = analyze_spectrum_dersnr(entry.path, params_file)
+            # print(data_out)
+
+            if data_out:
+                results.append({
+                    'Filename': entry.name,
+                    'SNR': float(data_out['snr']),
+                    'SN_Name': (data_out['sn_name'])
+                })
+
+    df = pd.DataFrame(results)
+    return df[['Filename', 'SNR', 'SN_Name']] if not df.empty else pd.DataFrame()
