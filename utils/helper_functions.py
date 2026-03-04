@@ -252,9 +252,9 @@ def calculate_sn_ages(params_file, spectra_mjd_file, output_file):
         # --- 1. Load Parameters ---
         params = pd.read_csv(
             params_file, comment='#', delim_whitespace=True, header=None,
-            usecols=[0, 1, 2, 3], names=['SN_name', 'zhel', 'mjd_max', 'mjd_max_err']
+            usecols=[0, 1, 2, 3, 5], names=['SN_name', 'zhel', 'mjd_max', 'mjd_max_err', 'dm15']
         )
-
+        params['dm15'] = params['dm15'].replace(9.99, np.nan)
         params['join_key'] = params['SN_name'].apply(normalize_param_name)
 
         # KEY CHANGE: Create a mask for valid dates instead of dropping rows
@@ -278,8 +278,8 @@ def calculate_sn_ages(params_file, spectra_mjd_file, output_file):
         df.loc[mask, 'Age_Unc'] = df['mjd_max_err'] / (1 + df['zhel'])
 
         # --- 4. Final Export ---
-        output_df = df[['filename', 'SN_name', 'Age', 'Age_Unc', 'zhel']].copy()
-        output_df.columns = ["Filename", "SN_Name", "Age_(days)", "Age_Unc_(days)", "redshift"]
+        output_df = df[['filename', 'SN_name', 'Age', 'Age_Unc', 'zhel', 'dm15']].copy()
+        output_df.columns = ["Filename", "SN_Name", "Age_(days)", "Age_Unc_(days)", "redshift", "Dm15"]
 
         # Ensure SN_Name isn't lost if the merge worked but Age didn't
         output_df.to_csv(output_file, index=False)
@@ -334,3 +334,4 @@ def find_sn_subtypes(spectra_file, classification_file, scheme):
     except Exception as e:
         print(f"Error in find_sn_subtypes: {e}")
         return None
+
