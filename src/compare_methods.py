@@ -1,0 +1,118 @@
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Configuration
+DYNESTY_FILE = 'outputs/method_comparison/cfa_dynesty_results.csv'
+SNID_FILE = 'outputs/method_comparison/cfa_SNID_results.csv'
+OUTPUT_DIR = 'outputs/method_comparison'
+STYLE_FILE = 'assets/plotting_style.mplstyle'
+
+def calculate_metrics(true, inferred):
+    residuals = inferred - true
+    sigma_t = residuals.std()
+    rmse = np.sqrt((residuals**2).mean())
+    bias = residuals.mean()
+    return sigma_t, rmse, bias
+
+def run_comparison():
+    # 1. Load Data
+    df_dyn = pd.read_csv(DYNESTY_FILE)
+    df_snid = pd.read_csv(SNID_FILE)
+
+    # Normalize filenames for merging
+    df_dyn['filename_norm'] = df_dyn['filename'].str.lower()
+    df_snid['filename_norm'] = df_snid['Filename'].str.lower()
+
+    # 2. Merge Data
+    # Inner join to only compare spectra present in both sets
+    df_merged = pd.merge(df_dyn, df_snid, on='filename_norm', suffixes=('_dyn', '_snid'))
+    
+    # Clean up
+    df_merged = df_merged.dropna(subset=['nuis_age', 'bootstrap_age', 'true_age'])
+    
+    if df_merged.empty:
+        print("Error: No overlapping spectra found between Dynesty and SNID results.")
+        return
+
+    # 3. Calculate Metrics
+    # We compare Nuisance Fit (Dynesty) vs Bootstrap Age (SNID)
+    sigma_n, rmse_n, bias_n = calculate_metrics(df_merged['true_age'], df_merged['nuis_age'])
+    sigma_s, rmse_s, bias_s = calculate_metrics(df_merged['true_age'], df_merged['bootstrap_age'])
+
+    print(f"--- Comparison Statistics (N={len(df_merged)}) ---")
+    print(f"Dynesty (Nuisance): Sigma_t={sigma_n:.3f}, RMSE={rmse_n:.3f}, Bias={bias_n:.3f}")
+    print(f"SNID (Bootstrap):  Sigma_t={sigma_s:.3f}, RMSE={rmse_s:.3f}, Bias={bias_s:.3f}")
+
+    # Save merged results
+    merged_path = os.path.join(OUTPUT_DIR, 'merged_comparison_results.csv')
+    df_merged.to_csv(merged_path, index=False)
+    print(f"Merged results saved to {merged_path}")
+
+    # 4. Plotting
+    if os.path.exists(STYLE_FILE):
+        plt.style.use(STYLE_FILE)
+    else:
+        plt.style.use('seaborn-v0_8-whitegrid')
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12), sharex=True, gridspec_kw={'height_ratios': [2, 1]})
+
+    # Determine limits
+    min_age = min(df_merged['true_age'].min(), df_merged['nuis_age'].min(), df_merged['bootstrap_age'].min()) - 2
+    max_age = max(df_merged['true_age'].max(), df_merged['nuis_age'].max(), df_merged['bootstrap_age'].max()) + 2
+
+    # Top Panel: Inferred Age vs True Age
+    ax1.errorbar(
+        df_merged['true_age'], df_merged['nuis_age'], yerr=df_merged['nuis_age_err'],
+        fmt='o', color='red', alpha=0.5, label='Dynesty (Nuisance)', capsize=0
+    )
+    ax1.errorbar(
+        df_merged['true_age'], df_merged['bootstrap_age'], yerr=df_merged['snid_std_dev'],
+        fmt='s', color='blue', alpha=0.4, label='SNID (Bootstrap)', capsize=0
+    )
+    
+    ax1.plot([min_age, max_age], [min_age, max_age], color='black', linestyle='--', alpha=0.7, label='1:1 Line')
+    ax1.set_ylabel(r"$t_{Inferred}$ (days)")
+    ax1.set_title(f"Dynesty (Nuisance) vs SNID on CfA Spectra (N={len(df_merged)})")
+
+    # Metrics Text Boxes
+    metrics_text = (r"$\bf{Dynesty\ (Nuisance):}$" + "\n"
+                    f"$\sigma_t$: {sigma_n:.2f} d\n"
+                    f"Bias: {bias_n:.2f} d\n\n"
+                    r"$\bf{SNID:}$" + "\n"
+                    f"$\sigma_t$: {sigma_s:.2f} d\n"
+                    f"Bias: {bias_s:.2f} d")
+    
+    ax1.text(0.05, 0.95, metrics_text, transform=ax1.transAxes,
+             va='top', ha='left', fontsize=12,
+             bbox=dict(boxstyle="round,pad=0.5", fc="white", ec="black", alpha=0.8))
+
+    ax1.legend(loc='lower right')
+    ax1.grid(True, alpha=0.3)
+    ax1.set_xlim(min_age, max_age)
+    ax1.set_ylim(min_age, max_age)
+
+    # Bottom Panel: Residuals
+    ax2.errorbar(
+        df_merged['true_age'], df_merged['nuis_age'] - df_merged['true_age'], yerr=df_merged['nuis_age_err'],
+        fmt='o', color='red', alpha=0.5, capsize=0
+    )
+    ax2.errorbar(
+        df_merged['true_age'], df_merged['bootstrap_age'] - df_merged['true_age'], yerr=df_merged['snid_std_dev'],
+        fmt='s', color='blue', alpha=0.4, capsize=0
+    )
+    
+    ax2.axhline(0, color='black', linestyle='--', alpha=0.7)
+    ax2.set_xlabel(r"$t_{True}$ (days)")
+    ax2.set_ylabel(r"$t_{Inferred} - t_{True}$ (days)")
+    ax2.grid(True, alpha=0.3)
+    ax2.set_xlim(min_age, max_age)
+
+    plt.tight_layout()
+    plot_path = os.path.join(OUTPUT_DIR, 'dynesty_vs_snid_comparison.png')
+    plt.savefig(plot_path, dpi=300)
+    print(f"Comparison plot saved to {plot_path}")
+
+if __name__ == "__main__":
+    run_comparison()
