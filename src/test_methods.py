@@ -65,10 +65,10 @@ def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None):
     if redshift is not None:
         model.set(z=redshift)
         params = ['t0', 'x1', 'c', 'log10_x0']
-        priors = {'t0': (-100, 100), 'x1': (-3, 3), 'c': (-0.8, 0.8), 'log10_x0': (-20, -2)}
+        priors = {'t0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
     else:
         params = ['z', 't0', 'x1', 'c', 'log10_x0']
-        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-3, 3), 'c': (-0.8, 0.8), 'log10_x0': (-20, -2)}
+        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
 
     def prior_transform(utheta):
         theta = np.zeros_like(utheta)
@@ -98,10 +98,10 @@ def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
     if redshift is not None:
         model.set(z=redshift)
         params = ['t0', 'x1', 'c']
-        priors = {'t0': (-100, 100), 'x1': (-3, 3), 'c': (-0.8, 0.8)}
+        priors = {'t0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
     else:
         params = ['z', 't0', 'x1', 'c']
-        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-3, 3), 'c': (-0.8, 0.8)}
+        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
 
     def prior_transform(utheta):
         theta = np.zeros_like(utheta)
