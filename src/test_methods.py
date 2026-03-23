@@ -128,7 +128,8 @@ def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
         chisq = np.sum(((flux - model_flux) / flux_err)**2)
         return -0.5 * chisq if not np.isnan(chisq) else -1e10
 
-    sampler = dynesty.NestedSampler(loglike, prior_transform, len(params), nlive=NLIVE, sample='rslice', bootstrap=0)
+    sampler = dynesty.NestedSampler(loglike, prior_transform, len(params), nlive=NLIVE, sample='rslice', bootstrap=0, pool=None,  # Change this to use multiprocessing
+                            queue_size=4)
     sampler.run_nested(print_progress=False)
     return sampler.results, params
 
