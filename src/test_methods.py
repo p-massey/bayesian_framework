@@ -9,7 +9,7 @@ import dynesty
 from joblib import Parallel, delayed
 
 # --- CONFIGURATION ---
-SPECTRA_DIR = "data/spectra/random"
+SPECTRA_DIR = "data/spectra/all_spectra"
 PARAM_FILE = os.path.join("data/spectra/test", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
@@ -214,7 +214,7 @@ def run_test():
     results = [r for r in results_raw if r is not None]
 
     df = pd.DataFrame(results)
-    df.to_csv("outputs/csvs/random_test_results.csv", index=False)
+    df.to_csv("outputs/csvs/allcfa_results.csv", index=False)
     
     # Plotting
     df = df.dropna()
@@ -244,9 +244,9 @@ def run_test():
     ax2.grid(True, ls=':', alpha=0.6)
     
     plt.tight_layout()
-    plt.savefig("outputs/plots/random_age_comparison.png")
+    plt.savefig("outputs/plots/allcfa_comparison.png")
     print(f"\nPipeline complete. Processed {len(df)} matched files.")
-    print("Results saved to outputs/csvs/random_test_results.csv and outputs/plots/random_age_comparison.png")
+    print("Results saved to outputs/csvs/allcfa_test_results.csv and outputs/plots/allcfa_comparison.png")
 
 if __name__ == "__main__":
     run_test()
