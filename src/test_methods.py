@@ -9,8 +9,8 @@ import dynesty
 from joblib import Parallel, delayed
 
 # --- CONFIGURATION ---
-SPECTRA_DIR = "data/spectra/all_spectra"
-PARAM_FILE = os.path.join("data/spectra/test", "cfasnIa_param.dat")
+SPECTRA_DIR = "data/all_spectra"
+PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
 N_CORES = 8  # Optimized for your 8-core production runs
