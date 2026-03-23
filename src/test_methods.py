@@ -6,12 +6,14 @@ from astropy.time import Time
 from datetime import datetime
 import sncosmo
 import dynesty
+from joblib import Parallel, delayed
 
 # --- CONFIGURATION ---
 SPECTRA_DIR = "data/spectra/random"
 PARAM_FILE = os.path.join("data/spectra/test", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
+N_CORES = 8  # Specifically using 8 cores as requested
 
 def parse_param_file(file_path):
     params = {}
@@ -128,83 +130,88 @@ def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
         chisq = np.sum(((flux - model_flux) / flux_err)**2)
         return -0.5 * chisq if not np.isnan(chisq) else -1e10
 
-    sampler = dynesty.NestedSampler(loglike, prior_transform, len(params), nlive=NLIVE, sample='rslice', bootstrap=0, pool=None,  # Change this to use multiprocessing
-                            queue_size=4)
+    sampler = dynesty.NestedSampler(loglike, prior_transform, len(params), nlive=NLIVE, sample='rslice', bootstrap=0)
     sampler.run_nested(print_progress=False)
     return sampler.results, params
 
+def process_single_file(filename, sn_params):
+    file_path = os.path.join(SPECTRA_DIR, filename)
+    
+    # Robust parsing
+    if filename.startswith('snf') or filename.startswith('sne'):
+        parts = filename.split('-')
+        sn_id = f"{parts[0]}-{parts[1]}"
+        date_str = parts[2]
+        param_lookup = sn_id.lower()
+    else:
+        parts = filename.split('-')
+        sn_id = parts[0]
+        date_str = parts[1]
+        param_lookup = sn_id[2:] if sn_id.startswith('sn') else sn_id
+    
+    if param_lookup not in sn_params:
+        return None
+        
+    p = sn_params[param_lookup]
+    if p['mjd_max'] > 90000:
+        return None
+    
+    z = p['z']
+    try:
+        mjd_obs = date_str_to_mjd(date_str)
+    except:
+        return None
+        
+    true_age = mjd_obs - p['mjd_max']
+    
+    wave, flux, err = load_flm_spectrum(file_path)
+    if len(wave) < 10:
+        return None
+        
+    mask = (wave > 3500) & (wave < 8000)
+    wave, flux, err = wave[mask], flux[mask], err[mask]
+    if len(wave) < 10:
+        return None
+    
+    # 1. Full Fit
+    try:
+        res_f, par_f = fit_full(wave, flux, err, redshift=z)
+        weights_f = np.exp(res_f.logwt - res_f.logz[-1])
+        s_f = dynesty.utils.resample_equal(res_f.samples, weights_f)
+        age_f = -np.mean(s_f[:, par_f.index('t0')])
+        age_f_err = np.std(s_f[:, par_f.index('t0')])
+    except Exception as e:
+        age_f, age_f_err = np.nan, np.nan
+        
+    # 2. Nuisance Fit
+    try:
+        res_n, par_n = fit_nuisance(wave, flux, err, redshift=z)
+        weights_n = np.exp(res_n.logwt - res_n.logz[-1])
+        s_n = dynesty.utils.resample_equal(res_n.samples, weights_n)
+        age_n = -np.mean(s_n[:, par_n.index('t0')])
+        age_n_err = np.std(s_n[:, par_n.index('t0')])
+    except Exception as e:
+        age_n, age_n_err = np.nan, np.nan
+    
+    return {
+        'filename': filename, 'true_age': true_age,
+        'full_age': age_f, 'full_age_err': age_f_err,
+        'nuis_age': age_n, 'nuis_age_err': age_n_err
+    }
+
 def run_test():
     sn_params = parse_param_file(PARAM_FILE)
-    results = []
     flm_files = sorted([f for f in os.listdir(SPECTRA_DIR) if f.endswith('.flm') or f.endswith('.dat')])
     
-    print(f"Found {len(flm_files)} files in {SPECTRA_DIR}")
+    print(f"Found {len(flm_files)} files in {SPECTRA_DIR}. Processing with {N_CORES} cores...")
 
-    for i, filename in enumerate(flm_files):
-        file_path = os.path.join(SPECTRA_DIR, filename)
-        
-        # Robust parsing
-        if filename.startswith('snf') or filename.startswith('sne'):
-            parts = filename.split('-')
-            sn_id = f"{parts[0]}-{parts[1]}"
-            date_str = parts[2]
-            param_lookup = sn_id.lower()
-        else:
-            parts = filename.split('-')
-            sn_id = parts[0]
-            date_str = parts[1]
-            param_lookup = sn_id[2:] if sn_id.startswith('sn') else sn_id
-        
-        if param_lookup not in sn_params:
-            continue
-            
-        p = sn_params[param_lookup]
-        if p['mjd_max'] > 90000:
-            continue
-        
-        z = p['z']
-        try:
-            mjd_obs = date_str_to_mjd(date_str)
-        except:
-            continue
-            
-        true_age = mjd_obs - p['mjd_max']
-        
-        print(f"[{i+1}/{len(flm_files)}] Processing {filename} (True Age: {true_age:.2f})...")
-        wave, flux, err = load_flm_spectrum(file_path)
-        if len(wave) < 10:
-            continue
-            
-        mask = (wave > 3500) & (wave < 8000)
-        wave, flux, err = wave[mask], flux[mask], err[mask]
-        if len(wave) < 10:
-            continue
-        
-        # 1. Full Fit
-        try:
-            res_f, par_f = fit_full(wave, flux, err, redshift=z)
-            weights_f = np.exp(res_f.logwt - res_f.logz[-1])
-            s_f = dynesty.utils.resample_equal(res_f.samples, weights_f)
-            age_f = -np.mean(s_f[:, par_f.index('t0')])
-            age_f_err = np.std(s_f[:, par_f.index('t0')])
-        except Exception as e:
-            age_f, age_f_err = np.nan, np.nan
-            
-        # 2. Nuisance Fit
-        try:
-            res_n, par_n = fit_nuisance(wave, flux, err, redshift=z)
-            weights_n = np.exp(res_n.logwt - res_n.logz[-1])
-            s_n = dynesty.utils.resample_equal(res_n.samples, weights_n)
-            age_n = -np.mean(s_n[:, par_n.index('t0')])
-            age_n_err = np.std(s_n[:, par_n.index('t0')])
-        except Exception as e:
-            age_n, age_n_err = np.nan, np.nan
-        
-        results.append({
-            'filename': filename, 'true_age': true_age,
-            'full_age': age_f, 'full_age_err': age_f_err,
-            'nuis_age': age_n, 'nuis_age_err': age_n_err
-        })
+    # Run in parallel with exactly N_CORES
+    results_raw = Parallel(n_jobs=N_CORES, verbose=10)(
+        delayed(process_single_file)(f, sn_params) for f in flm_files
+    )
+    
+    # Filter out None values
+    results = [r for r in results_raw if r is not None]
 
     df = pd.DataFrame(results)
     df.to_csv("outputs/csvs/random_test_results.csv", index=False)
