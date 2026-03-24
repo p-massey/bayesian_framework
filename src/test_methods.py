@@ -13,7 +13,7 @@ SPECTRA_DIR = "data/all_spectra"
 PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
-N_CORES = 8  # Optimized for your 8-core production runs
+N_CORES = 16  # Optimized for 16-core cluster runs
 
 def parse_param_file(file_path):
     """Parses the SN parameter file for redshift and MJD of maximum."""
@@ -68,10 +68,11 @@ def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None):
     if redshift is not None:
         model.set(z=redshift)
         params = ['t0', 'x1', 'c', 'log10_x0']
-        priors = {'t0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
+        # Age = -t0. To cover age (-20, 50), t0 must be (-50, 20)
+        priors = {'t0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
     else:
         params = ['z', 't0', 'x1', 'c', 'log10_x0']
-        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
+        priors = {'z': (0.005, 0.1), 't0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
 
     def pt(u):
         t = np.zeros_like(u)
@@ -101,10 +102,10 @@ def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
     if redshift is not None:
         model.set(z=redshift)
         params = ['t0', 'x1', 'c']
-        priors = {'t0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
+        priors = {'t0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
     else:
         params = ['z', 't0', 'x1', 'c']
-        priors = {'z': (0.005, 0.1), 't0': (-100, 100), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
+        priors = {'z': (0.005, 0.1), 't0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
 
     def pt(u):
         t = np.zeros_like(u)
@@ -166,18 +167,52 @@ def process_single_file(filename, sn_params):
     if len(wave) < 10: return None
     
     # Execute Fits
-    res = {'filename': filename, 'true_age': true_age}
+    res = {'filename': filename, 'true_age': true_age, 'z_true': p['z']}
     
     for method, fit_func in [('full', fit_full), ('nuis', fit_nuisance)]:
         try:
             results, par_names = fit_func(wave, flux, err, redshift=p['z'])
             weights = np.exp(results.logwt - results.logz[-1])
             samples = dynesty.utils.resample_equal(results.samples, weights)
-            t0_samples = samples[:, par_names.index('t0')]
-            res[f'{method}_age'] = -np.mean(t0_samples)
-            res[f'{method}_age_err'] = np.std(t0_samples)
+            
+            for i, name in enumerate(par_names):
+                s = samples[:, i]
+                if name == 't0':
+                    res[f'{method}_age'] = -np.mean(s)
+                    res[f'{method}_age_err'] = np.std(s)
+                elif name == 'log10_x0':
+                    x0_samples = 10**s
+                    res[f'{method}_x0'] = np.mean(x0_samples)
+                    res[f'{method}_x0_err'] = np.std(x0_samples)
+                else:
+                    res[f'{method}_{name}'] = np.mean(s)
+                    res[f'{method}_{name}_err'] = np.std(s)
+            
+            # Special case for nuisance x0
+            if method == 'nuis':
+                model = sncosmo.Model(source=MODEL_NAME)
+                if p['z'] is not None:
+                    model.set(z=p['z'])
+                
+                x0_list = []
+                for sample in samples:
+                    p_dict = dict(zip(par_names, sample))
+                    model.set(**p_dict)
+                    model.set(x0=1.0)
+                    m_flux_unit = model.flux(0.0, wave)
+                    w = 1.0 / err**2
+                    num = np.sum(flux * m_flux_unit * w)
+                    den = np.sum(m_flux_unit**2 * w)
+                    x0_val = num / den if den > 0 else np.nan
+                    x0_list.append(x0_val)
+                
+                x0_arr = np.array(x0_list)
+                res[f'nuis_x0'] = np.nanmean(x0_arr)
+                res[f'nuis_x0_err'] = np.nanstd(x0_arr)
+                    
         except Exception:
-            res[f'{method}_age'], res[f'{method}_age_err'] = np.nan, np.nan
+            # Add NaNs if fit fails
+            res[f'{method}_age'] = np.nan
             
     return res
 
@@ -200,29 +235,30 @@ def run_test():
         print("No valid fits completed.")
         return
 
-    df = pd.DataFrame(results).dropna()
+    df = pd.DataFrame(results)
     output_csv = "outputs/csvs/allcfa_results.csv"
     df.to_csv(output_csv, index=False)
     
-    # Plotting
-    if df.empty:
-        print("DataFrame is empty after dropping NaNs.")
+    # Plotting (Filtered for Age comparison)
+    plot_df = df.dropna(subset=['full_age', 'nuis_age'])
+    if plot_df.empty:
+        print("DataFrame is empty after dropping NaNs for plotting.")
         return
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10), sharex=True, gridspec_kw={'height_ratios': [3, 1]})
     
-    ax1.errorbar(df['true_age'], df['full_age'], yerr=df['full_age_err'], fmt='o', label='Full (x0 sampled)', color='blue', alpha=0.5)
-    ax1.errorbar(df['true_age'], df['nuis_age'], yerr=df['nuis_age_err'], fmt='s', label='Nuisance (x0 marginalized)', color='red', alpha=0.5)
+    ax1.errorbar(plot_df['true_age'], plot_df['full_age'], yerr=plot_df.get('full_age_err', 0), fmt='o', label='Full (x0 sampled)', color='blue', alpha=0.5)
+    ax1.errorbar(plot_df['true_age'], plot_df['nuis_age'], yerr=plot_df.get('nuis_age_err', 0), fmt='s', label='Nuisance (x0 marginalized)', color='red', alpha=0.5)
     
-    lims = [min(df['true_age'].min(), df['full_age'].min()) - 5, max(df['true_age'].max(), df['full_age'].max()) + 5]
+    lims = [min(plot_df['true_age'].min(), plot_df['full_age'].min()) - 5, max(plot_df['true_age'].max(), plot_df['full_age'].max()) + 5]
     ax1.plot(lims, lims, 'k--', label='1:1 Line')
     ax1.set_ylabel('Inferred Age (days)')
-    ax1.set_title(f'Method Comparison: CfA Spectra (N={len(df)})')
+    ax1.set_title(f'Method Comparison: CfA Spectra (N={len(plot_df)})')
     ax1.legend()
     ax1.grid(True, ls=':', alpha=0.6)
     
-    ax2.errorbar(df['true_age'], df['full_age'] - df['true_age'], yerr=df['full_age_err'], fmt='o', color='blue', alpha=0.5)
-    ax2.errorbar(df['true_age'], df['nuis_age'] - df['true_age'], yerr=df['nuis_age_err'], fmt='s', color='red', alpha=0.5)
+    ax2.errorbar(plot_df['true_age'], plot_df['full_age'] - plot_df['true_age'], yerr=plot_df.get('full_age_err', 0), fmt='o', color='blue', alpha=0.5)
+    ax2.errorbar(plot_df['true_age'], plot_df['nuis_age'] - plot_df['true_age'], yerr=plot_df.get('nuis_age_err', 0), fmt='s', color='red', alpha=0.5)
     ax2.axhline(0, color='k', ls='--')
     ax2.set_xlabel('True Age (days)')
     ax2.set_ylabel('Residual (days)')
