@@ -14,6 +14,7 @@ PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
 N_CORES = 16  # Optimized for 16-core cluster runs
+FORCE_RERUN = True  # Set to True to rerun all files and overwrite the CSV
 
 def parse_param_file(file_path):
     """Parses the SN parameter file for redshift and MJD of maximum."""
