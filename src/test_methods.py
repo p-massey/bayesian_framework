@@ -278,17 +278,19 @@ def run_test():
     flm_files = sorted([f for f in os.listdir(SPECTRA_DIR) if f.endswith(('.flm', '.dat'))])
     
     # --- CHECKPOINTING ---
-    if os.path.exists(output_csv):
+    if os.path.exists(output_csv) and not FORCE_RERUN:
         existing_df = pd.read_csv(output_csv)
         processed_files = set(existing_df['filename'].unique())
         print(f"Found existing results. {len(processed_files)} spectra already processed.")
         files_to_run = [f for f in flm_files if f not in processed_files]
     else:
+        if FORCE_RERUN:
+            print("FORCE_RERUN is True. Starting fresh run on all files.")
         existing_df = pd.DataFrame()
         files_to_run = flm_files
 
     if not files_to_run:
-        print("All candidate files already processed. Use a clean file to re-run.")
+        print("All candidate files already processed. Use a clean file or FORCE_RERUN to re-run.")
         return
 
     print(f"Processing {len(files_to_run)} files (out of {len(flm_files)}) on {N_CORES} cores...")
