@@ -1,0 +1,104 @@
+nohup: ignoring input
+Found 2603 candidate files. Starting 8-core parallel processing...
+[Parallel(n_jobs=8)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=8)]: Done   2 tasks      | elapsed:    1.5s
+[Parallel(n_jobs=8)]: Done   9 tasks      | elapsed:    1.5s
+[Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    1.6s
+[Parallel(n_jobs=8)]: Done  25 tasks      | elapsed:    1.6s
+[Parallel(n_jobs=8)]: Batch computation too fast (0.1856078718187699s.) Setting batch_size=2.
+[Parallel(n_jobs=8)]: Done  34 tasks      | elapsed:    1.7s
+[Parallel(n_jobs=8)]: Done  45 tasks      | elapsed:    1.7s
+[Parallel(n_jobs=8)]: Batch computation too fast (0.047449350357055664s.) Setting batch_size=4.
+[Parallel(n_jobs=8)]: Done  64 tasks      | elapsed:  1.7min
+[Parallel(n_jobs=8)]: Batch computation too slow (100.92291784286499s.) Setting batch_size=1.
+[Parallel(n_jobs=8)]: Done 100 tasks      | elapsed:  4.4min
+[Parallel(n_jobs=8)]: Done 125 tasks      | elapsed:  5.4min
+[Parallel(n_jobs=8)]: Done 161 tasks      | elapsed: 10.5min
+[Parallel(n_jobs=8)]: Done 176 tasks      | elapsed: 10.9min
+[Parallel(n_jobs=8)]: Done 193 tasks      | elapsed: 12.8min
+[Parallel(n_jobs=8)]: Done 210 tasks      | elapsed: 15.8min
+[Parallel(n_jobs=8)]: Done 229 tasks      | elapsed: 18.1min
+[Parallel(n_jobs=8)]: Done 248 tasks      | elapsed: 20.6min
+[Parallel(n_jobs=8)]: Done 269 tasks      | elapsed: 22.8min
+[Parallel(n_jobs=8)]: Done 290 tasks      | elapsed: 25.3min
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+[Parallel(n_jobs=8)]: Done 313 tasks      | elapsed: 30.6min
+[Parallel(n_jobs=8)]: Done 336 tasks      | elapsed: 33.6min
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+[Parallel(n_jobs=8)]: Done 361 tasks      | elapsed: 39.6min
+[Parallel(n_jobs=8)]: Done 386 tasks      | elapsed: 43.0min
+[Parallel(n_jobs=8)]: Done 413 tasks      | elapsed: 48.1min
+[Parallel(n_jobs=8)]: Done 440 tasks      | elapsed: 52.5min
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+[Parallel(n_jobs=8)]: Done 469 tasks      | elapsed: 59.7min
+[Parallel(n_jobs=8)]: Done 498 tasks      | elapsed: 65.3min
+[Parallel(n_jobs=8)]: Done 529 tasks      | elapsed: 70.3min
+[Parallel(n_jobs=8)]: Done 560 tasks      | elapsed: 75.4min
+[Parallel(n_jobs=8)]: Done 593 tasks      | elapsed: 81.0min
+[Parallel(n_jobs=8)]: Done 626 tasks      | elapsed: 87.1min
+[Parallel(n_jobs=8)]: Done 661 tasks      | elapsed: 90.5min
+[Parallel(n_jobs=8)]: Done 696 tasks      | elapsed: 95.2min
+[Parallel(n_jobs=8)]: Done 733 tasks      | elapsed: 98.5min
+[Parallel(n_jobs=8)]: Done 770 tasks      | elapsed: 100.7min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.18028358299281833s.) Setting batch_size=2.
+[Parallel(n_jobs=8)]: Batch computation too fast (0.0335688591003418s.) Setting batch_size=4.
+[Parallel(n_jobs=8)]: Done 825 tasks      | elapsed: 100.7min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.10533905029296875s.) Setting batch_size=8.
+[Parallel(n_jobs=8)]: Batch computation too slow (340.9282376766205s.) Setting batch_size=1.
+[Parallel(n_jobs=8)]: Done 975 tasks      | elapsed: 116.0min
+[Parallel(n_jobs=8)]: Done 1065 tasks      | elapsed: 131.2min
+[Parallel(n_jobs=8)]: Done 1106 tasks      | elapsed: 137.0min
+[Parallel(n_jobs=8)]: Done 1149 tasks      | elapsed: 147.7min
+[Parallel(n_jobs=8)]: Done 1192 tasks      | elapsed: 157.8min
+[Parallel(n_jobs=8)]: Done 1237 tasks      | elapsed: 168.2min
+[Parallel(n_jobs=8)]: Done 1282 tasks      | elapsed: 178.3min
+[Parallel(n_jobs=8)]: Done 1329 tasks      | elapsed: 181.0min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.19312529306638032s.) Setting batch_size=2.
+[Parallel(n_jobs=8)]: Batch computation too slow (356.4722969532013s.) Setting batch_size=1.
+[Parallel(n_jobs=8)]: Done 1392 tasks      | elapsed: 194.3min
+[Parallel(n_jobs=8)]: Done 1441 tasks      | elapsed: 201.5min
+[Parallel(n_jobs=8)]: Done 1490 tasks      | elapsed: 206.2min
+[Parallel(n_jobs=8)]: Done 1541 tasks      | elapsed: 212.8min
+[Parallel(n_jobs=8)]: Done 1592 tasks      | elapsed: 220.3min
+[Parallel(n_jobs=8)]: Done 1645 tasks      | elapsed: 231.1min
+[Parallel(n_jobs=8)]: Done 1698 tasks      | elapsed: 243.3min
+[Parallel(n_jobs=8)]: Done 1753 tasks      | elapsed: 254.2min
+[Parallel(n_jobs=8)]: Done 1808 tasks      | elapsed: 268.9min
+[Parallel(n_jobs=8)]: Done 1865 tasks      | elapsed: 284.2min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.1820770025102109s.) Setting batch_size=2.
+[Parallel(n_jobs=8)]: Done 1923 tasks      | elapsed: 285.9min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.07199239730834961s.) Setting batch_size=4.
+[Parallel(n_jobs=8)]: Batch computation too slow (472.1441059112549s.) Setting batch_size=1.
+[Parallel(n_jobs=8)]: Done 2045 tasks      | elapsed: 311.6min
+[Parallel(n_jobs=8)]: Done 2104 tasks      | elapsed: 326.0min
+[Parallel(n_jobs=8)]: Done 2165 tasks      | elapsed: 333.3min
+[Parallel(n_jobs=8)]: Done 2226 tasks      | elapsed: 346.4min
+[Parallel(n_jobs=8)]: Done 2289 tasks      | elapsed: 361.0min
+[Parallel(n_jobs=8)]: Done 2352 tasks      | elapsed: 375.8min
+[Parallel(n_jobs=8)]: Done 2417 tasks      | elapsed: 388.3min
+[Parallel(n_jobs=8)]: Done 2482 tasks      | elapsed: 393.3min
+[Parallel(n_jobs=8)]: Batch computation too fast (0.18942598499372254s.) Setting batch_size=2.
+[Parallel(n_jobs=8)]: Batch computation too fast (0.029674530029296875s.) Setting batch_size=4.
+[Parallel(n_jobs=8)]: Batch computation too slow (309.37285470962524s.) Setting batch_size=1.
+[Parallel(n_jobs=8)]: Done 2603 out of 2603 | elapsed: 409.5min finished
+
+Processing complete. Results: outputs/csvs/allcfa_results.csv, Plot: outputs/plots/allcfa_comparison.png
