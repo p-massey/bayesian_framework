@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- CONFIGURATION ---
-MERGED_FILE = 'outputs/method_comparison/merged_comparison_results.csv'
+# Use the filtered results from the main comparison script
+MERGED_FILE = 'outputs/method_comparison/filtered_comparison_results.csv'
 OUTPUT_DIR = 'outputs/method_comparison'
 STYLE_FILE = 'assets/plotting_style.mplstyle'
-
 
 # Colorblind-friendly colors (Okabe-Ito palette)
 CB_VERMILION = '#D55E00'
@@ -22,12 +22,11 @@ def run_binned_comparison():
     df = pd.read_csv(MERGED_FILE)
     
     # 2. Define Bins
-    # We cover -20 to 50 days. 5-day bins are usually a good balance.
-    bin_edges = np.arange(-20, 51, 5)
+    # Covering -15 to 50 days (to match current cuts)
+    bin_edges = np.arange(-15, 51, 5)
     df['age_bin'] = pd.cut(df['true_age'], bins=bin_edges)
     
     # 3. Calculate Binned Statistics
-    # For each bin, we want mean bias and dispersion (std dev)
     df['bias_dyn'] = df['nuis_age'] - df['true_age']
     df['bias_snid'] = df['bootstrap_age'] - df['true_age']
     
@@ -41,8 +40,8 @@ def run_binned_comparison():
     bin_stats.columns = ['age_bin', 'bias_dyn_mean', 'bias_dyn_std', 'count_dyn', 
                          'bias_snid_mean', 'bias_snid_std', 'count_snid', 'bin_center_mean']
     
-    # Filter out bins with too few points if necessary
-    bin_stats = bin_stats[bin_stats['count_dyn'] > 2]
+    # Filter out bins with too few points
+    bin_stats = bin_stats[bin_stats['count_dyn'] > 2].copy()
 
     # 4. Plotting
     if os.path.exists(STYLE_FILE):
@@ -55,35 +54,36 @@ def run_binned_comparison():
     # Subplot 1: Mean Bias
     ax1.errorbar(
         bin_stats['bin_center_mean'], bin_stats['bias_dyn_mean'], 
-        yerr=bin_stats['bias_dyn_std'] / np.sqrt(bin_stats['count_dyn']), # Std Error of Mean
-        fmt='o-', color=CB_VERMILION, label='Dynesty (Nuisance)', capsize=3, lw=2
+        yerr=bin_stats['bias_dyn_std'] / np.sqrt(bin_stats['count_dyn']), # SEM
+        fmt='o-', color='red', label='Dynesty (Nuisance)', capsize=3, lw=2, markersize=6
     )
     ax1.errorbar(
         bin_stats['bin_center_mean'], bin_stats['bias_snid_mean'], 
         yerr=bin_stats['bias_snid_std'] / np.sqrt(bin_stats['count_snid']), 
-        fmt='s-', color=CB_BLUE, label='SNID (Bootstrap)', capsize=3, lw=2
+        fmt='s-', color='blue', label='SNID (Bootstrap)', capsize=3, lw=2, markersize=6
     )
     
     ax1.axhline(0, color='black', linestyle='--', alpha=0.5)
     ax1.set_ylabel('Mean Bias (days)')
-    ax1.set_title('Binned Performance Comparison (5-day bins)')
+    ax1.set_title('Binned Performance: Dynesty vs SNID (5-day bins)')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
 
     # Subplot 2: Dispersion (Sigma_t)
     ax2.plot(
         bin_stats['bin_center_mean'], bin_stats['bias_dyn_std'], 
-        'o-', color=CB_VERMILION, label='Dynesty $\sigma_t$', lw=2
+        'o-', color='red', label='Dynesty $\sigma_t$', lw=2, markersize=6
     )
     ax2.plot(
         bin_stats['bin_center_mean'], bin_stats['bias_snid_std'], 
-        's-', color=CB_BLUE, label='SNID $\sigma_t$', lw=2
+        's-', color='blue', label='SNID $\sigma_t$', lw=2, markersize=6
     )
     
     ax2.set_xlabel('True Age (days)')
     ax2.set_ylabel('Dispersion $\sigma_t$ (days)')
     ax2.grid(True, alpha=0.3)
     ax2.legend()
+    ax2.set_ylim(0, 12) # Reasonable range for dispersion
 
     plt.tight_layout()
     plot_path = os.path.join(OUTPUT_DIR, 'binned_method_comparison.png')
