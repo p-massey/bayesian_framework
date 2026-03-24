@@ -7,6 +7,7 @@ from datetime import datetime
 import sncosmo
 import dynesty
 from joblib import Parallel, delayed
+from functools import partial
 
 # --- CONFIGURATION ---
 SPECTRA_DIR = "data/all_spectra"
@@ -56,42 +57,82 @@ def load_flm_spectrum(file_path):
         
         wavelength = data[:, 0]
         flux = data[:, 1]
-        flux_err = data[:, 2] if data.shape[1] >= 3 else 0.1 * np.abs(flux)
+        
+        if data.shape[1] >= 3:
+            flux_err = data[:, 2]
+            # Handle zero or non-positive errors which are common in some datasets
+            zero_mask = (flux_err <= 0) | (~np.isfinite(flux_err))
+            if np.any(zero_mask):
+                # Use 10% of flux as a fallback for zero errors
+                fallback_err = 0.1 * np.abs(flux)
+                # Ensure a small floor for flux errors
+                min_err = np.percentile(np.abs(flux[flux > 0]), 5) * 0.1 if np.any(flux > 0) else 1e-18
+                fallback_err = np.maximum(fallback_err, min_err)
+                flux_err[zero_mask] = fallback_err[zero_mask]
+        else:
+            flux_err = 0.1 * np.abs(flux)
         
         mask = np.isfinite(flux) & np.isfinite(flux_err) & (flux_err > 0)
         return wavelength[mask], flux[mask], flux_err[mask]
     except Exception:
         return np.array([]), np.array([]), np.array([])
 
-def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None, checkpoint_file=None):
-    """Standard Nested Sampling fit including x0 sampling."""
+def prior_transform(u, params, priors):
+    t = np.zeros_like(u)
+    for i, p in enumerate(params):
+        low, high = priors[p]
+        t[i] = u[i] * (high - low) + low
+    return t
+
+def log_likelihood_full(t, params, wavelength, flux, flux_err, model_name, redshift):
     model = sncosmo.Model(source=model_name)
     if redshift is not None:
         model.set(z=redshift)
+    
+    p_dict = dict(zip(params, t))
+    if 'log10_x0' in p_dict: 
+        p_dict['x0'] = 10**p_dict.pop('log10_x0')
+    
+    model.set(**p_dict)
+    try:
+        m_flux = model.flux(0.0, wavelength)
+        chisq = np.sum(((flux - m_flux) / flux_err)**2)
+        return -0.5 * chisq if not np.isnan(chisq) else -1e10
+    except:
+        return -1e10
+
+def log_likelihood_nuisance(t, params, wavelength, flux, flux_err, model_name, redshift):
+    model = sncosmo.Model(source=model_name)
+    if redshift is not None:
+        model.set(z=redshift)
+        
+    p_dict = dict(zip(params, t))
+    model.set(**p_dict)
+    try:
+        model.set(x0=1.0)
+        m_flux_unit = model.flux(0.0, wavelength)
+        w = 1.0 / flux_err**2
+        num = np.sum(flux * m_flux_unit * w)
+        den = np.sum(m_flux_unit**2 * w)
+        if den <= 0: return -1e10
+        x0_best = num / den
+        if x0_best <= 0: return -1e10
+        chisq = np.sum(((flux - x0_best * m_flux_unit) / flux_err)**2)
+        return -0.5 * chisq if not np.isnan(chisq) else -1e10
+    except:
+        return -1e10
+
+def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None, checkpoint_file=None):
+    """Standard Nested Sampling fit including x0 sampling."""
+    if redshift is not None:
         params = ['t0', 'x1', 'c', 'log10_x0']
-        # Age = -t0. To cover age (-20, 50), t0 must be (-50, 20)
         priors = {'t0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
     else:
         params = ['z', 't0', 'x1', 'c', 'log10_x0']
         priors = {'z': (0.005, 0.1), 't0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5), 'log10_x0': (-20, -2)}
 
-    def pt(u):
-        t = np.zeros_like(u)
-        for i, p in enumerate(params):
-            low, high = priors[p]
-            t[i] = u[i] * (high - low) + low
-        return t
-
-    def ll(t):
-        p_dict = dict(zip(params, t))
-        if 'log10_x0' in p_dict: p_dict['x0'] = 10**p_dict.pop('log10_x0')
-        model.set(**p_dict)
-        try:
-            m_flux = model.flux(0.0, wavelength)
-            chisq = np.sum(((flux - m_flux) / flux_err)**2)
-            return -0.5 * chisq if not np.isnan(chisq) else -1e10
-        except:
-            return -1e10
+    pt = partial(prior_transform, params=params, priors=priors)
+    ll = partial(log_likelihood_full, params=params, wavelength=wavelength, flux=flux, flux_err=flux_err, model_name=model_name, redshift=redshift)
 
     sampler = dynesty.NestedSampler(ll, pt, len(params), nlive=NLIVE, sample='rslice')
     sampler.run_nested(print_progress=False, checkpoint_file=checkpoint_file)
@@ -99,38 +140,15 @@ def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None, chec
 
 def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None, checkpoint_file=None):
     """Nested Sampling fit with x0 analytically marginalized."""
-    model = sncosmo.Model(source=model_name)
     if redshift is not None:
-        model.set(z=redshift)
         params = ['t0', 'x1', 'c']
         priors = {'t0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
     else:
         params = ['z', 't0', 'x1', 'c']
         priors = {'z': (0.005, 0.1), 't0': (-50, 20), 'x1': (-6, 6), 'c': (-1.5, 1.5)}
 
-    def pt(u):
-        t = np.zeros_like(u)
-        for i, p in enumerate(params):
-            low, high = priors[p]
-            t[i] = u[i] * (high - low) + low
-        return t
-
-    def ll(t):
-        p_dict = dict(zip(params, t))
-        model.set(**p_dict)
-        try:
-            model.set(x0=1.0)
-            m_flux_unit = model.flux(0.0, wavelength)
-            w = 1.0 / flux_err**2
-            num = np.sum(flux * m_flux_unit * w)
-            den = np.sum(m_flux_unit**2 * w)
-            if den <= 0: return -1e10
-            x0_best = num / den
-            if x0_best <= 0: return -1e10
-            chisq = np.sum(((flux - x0_best * m_flux_unit) / flux_err)**2)
-            return -0.5 * chisq if not np.isnan(chisq) else -1e10
-        except:
-            return -1e10
+    pt = partial(prior_transform, params=params, priors=priors)
+    ll = partial(log_likelihood_nuisance, params=params, wavelength=wavelength, flux=flux, flux_err=flux_err, model_name=model_name, redshift=redshift)
 
     sampler = dynesty.NestedSampler(ll, pt, len(params), nlive=NLIVE, sample='rslice')
     sampler.run_nested(print_progress=False, checkpoint_file=checkpoint_file)
@@ -163,6 +181,7 @@ def process_single_file(filename, sn_params):
     
     # Load and Pre-process
     wave, flux, err = load_flm_spectrum(file_path)
+    if len(wave) == 0: return None
     mask = (wave > 3500) & (wave < 8000)
     wave, flux, err = wave[mask], flux[mask], err[mask]
     if len(wave) < 10: return None
