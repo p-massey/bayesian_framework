@@ -62,7 +62,7 @@ def load_flm_spectrum(file_path):
     except Exception:
         return np.array([]), np.array([]), np.array([])
 
-def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None):
+def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None, checkpoint_file=None):
     """Standard Nested Sampling fit including x0 sampling."""
     model = sncosmo.Model(source=model_name)
     if redshift is not None:
@@ -93,10 +93,10 @@ def fit_full(wavelength, flux, flux_err, model_name='salt3', redshift=None):
             return -1e10
 
     sampler = dynesty.NestedSampler(ll, pt, len(params), nlive=NLIVE, sample='rslice')
-    sampler.run_nested(print_progress=False)
+    sampler.run_nested(print_progress=False, checkpoint_file=checkpoint_file)
     return sampler.results, params
 
-def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
+def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None, checkpoint_file=None):
     """Nested Sampling fit with x0 analytically marginalized."""
     model = sncosmo.Model(source=model_name)
     if redshift is not None:
@@ -132,7 +132,7 @@ def fit_nuisance(wavelength, flux, flux_err, model_name='salt3', redshift=None):
             return -1e10
 
     sampler = dynesty.NestedSampler(ll, pt, len(params), nlive=NLIVE, sample='rslice')
-    sampler.run_nested(print_progress=False)
+    sampler.run_nested(print_progress=False, checkpoint_file=checkpoint_file)
     return sampler.results, params
 
 def process_single_file(filename, sn_params):
@@ -166,34 +166,80 @@ def process_single_file(filename, sn_params):
     wave, flux, err = wave[mask], flux[mask], err[mask]
     if len(wave) < 10: return None
     
+    # Ensure checkpoint directory exists
+    checkpoint_dir = "checkpoints"
+    os.makedirs(checkpoint_dir, exist_ok=True)
+
     # Execute Fits
     res = {'filename': filename, 'true_age': true_age, 'z_true': p['z']}
     
     for method, fit_func in [('full', fit_full), ('nuis', fit_nuisance)]:
+        # Define a unique checkpoint file for this fit
+        checkpoint_file = os.path.join(checkpoint_dir, f"{filename}_{method}.save")
+        
         try:
-            results, par_names = fit_func(wave, flux, err, redshift=p['z'])
+            results, par_names = fit_func(wave, flux, err, redshift=p['z'], checkpoint_file=checkpoint_file)
             weights = np.exp(results.logwt - results.logz[-1])
             samples = dynesty.utils.resample_equal(results.samples, weights)
             
+            # Store log Evidence and basic diagnostics
+            res[f'{method}_logz'] = results.logz[-1]
+            res[f'{method}_logzerr'] = results.logzerr[-1]
+            res[f'{method}_ncall'] = results.ncall
+            res[f'{method}_eff'] = results.eff
+            
+            # Compute best-fit Chi2 (at the mean parameter values)
+            mean_params = np.mean(samples, axis=0)
+            p_dict_best = dict(zip(par_names, mean_params))
+            
+            model = sncosmo.Model(source=MODEL_NAME)
+            model.set(z=p['z'])
+            
+            if method == 'full':
+                if 'log10_x0' in p_dict_best: p_dict_best['x0'] = 10**p_dict_best.pop('log10_x0')
+                model.set(**p_dict_best)
+                m_flux = model.flux(0.0, wave)
+                best_chisq = np.sum(((flux - m_flux) / err)**2)
+            else:
+                model.set(**p_dict_best)
+                model.set(x0=1.0)
+                m_flux_unit = model.flux(0.0, wave)
+                w = 1.0 / err**2
+                x0_best = np.sum(flux * m_flux_unit * w) / np.sum(m_flux_unit**2 * w)
+                best_chisq = np.sum(((flux - x0_best * m_flux_unit) / err)**2)
+            
+            res[f'{method}_chi2'] = best_chisq
+            res[f'{method}_ndof'] = len(wave) - len(par_names)
+
             for i, name in enumerate(par_names):
                 s = samples[:, i]
+                # Common stats
+                mean, std = np.mean(s), np.std(s)
+                median = np.median(s)
+                q16, q84 = np.percentile(s, [16, 84])
+                
                 if name == 't0':
-                    res[f'{method}_age'] = -np.mean(s)
-                    res[f'{method}_age_err'] = np.std(s)
+                    res[f'{method}_age'] = -mean
+                    res[f'{method}_age_err'] = std
+                    res[f'{method}_t0_mean'] = mean
+                    res[f'{method}_t0_std'] = std
+                    res[f'{method}_t0_median'] = median
                 elif name == 'log10_x0':
                     x0_samples = 10**s
-                    res[f'{method}_x0'] = np.mean(x0_samples)
-                    res[f'{method}_x0_err'] = np.std(x0_samples)
+                    res[f'{method}_x0_mean'] = np.mean(x0_samples)
+                    res[f'{method}_x0_std'] = np.std(x0_samples)
+                    res[f'{method}_x0_median'] = np.median(x0_samples)
+                    res[f'{method}_log10_x0_mean'] = mean
+                    res[f'{method}_log10_x0_std'] = std
                 else:
-                    res[f'{method}_{name}'] = np.mean(s)
-                    res[f'{method}_{name}_err'] = np.std(s)
+                    res[f'{method}_{name}_mean'] = mean
+                    res[f'{method}_{name}_std'] = std
+                    res[f'{method}_{name}_median'] = median
+                    res[f'{method}_{name}_q16'] = q16
+                    res[f'{method}_{name}_q84'] = q84
             
-            # Special case for nuisance x0
+            # Special case for nuisance x0 (calculated for every sample)
             if method == 'nuis':
-                model = sncosmo.Model(source=MODEL_NAME)
-                if p['z'] is not None:
-                    model.set(z=p['z'])
-                
                 x0_list = []
                 for sample in samples:
                     p_dict = dict(zip(par_names, sample))
@@ -207,67 +253,68 @@ def process_single_file(filename, sn_params):
                     x0_list.append(x0_val)
                 
                 x0_arr = np.array(x0_list)
-                res[f'nuis_x0'] = np.nanmean(x0_arr)
-                res[f'nuis_x0_err'] = np.nanstd(x0_arr)
+                res[f'nuis_x0_mean'] = np.nanmean(x0_arr)
+                res[f'nuis_x0_std'] = np.nanstd(x0_arr)
+                res[f'nuis_x0_median'] = np.nanmedian(x0_arr)
+
+            # If fit succeeded, remove the checkpoint file
+            if os.path.exists(checkpoint_file):
+                os.remove(checkpoint_file)
                     
-        except Exception:
-            # Add NaNs if fit fails
+        except Exception as e:
+            print(f"Error fitting {filename} with {method}: {e}")
             res[f'{method}_age'] = np.nan
             
     return res
 
 def run_test():
-    """Main pipeline execution."""
+    """Main pipeline execution with checkpointing."""
     os.makedirs("outputs/csvs", exist_ok=True)
     os.makedirs("outputs/plots", exist_ok=True)
+    output_csv = "outputs/csvs/allcfa_results.csv"
 
     sn_params = parse_param_file(PARAM_FILE)
     flm_files = sorted([f for f in os.listdir(SPECTRA_DIR) if f.endswith(('.flm', '.dat'))])
     
-    print(f"Found {len(flm_files)} candidate files. Starting {N_CORES}-core parallel processing...")
+    # --- CHECKPOINTING ---
+    if os.path.exists(output_csv):
+        existing_df = pd.read_csv(output_csv)
+        processed_files = set(existing_df['filename'].unique())
+        print(f"Found existing results. {len(processed_files)} spectra already processed.")
+        files_to_run = [f for f in flm_files if f not in processed_files]
+    else:
+        existing_df = pd.DataFrame()
+        files_to_run = flm_files
 
-    results_raw = Parallel(n_jobs=N_CORES, verbose=10)(
-        delayed(process_single_file)(f, sn_params) for f in flm_files
-    )
-    
-    results = [r for r in results_raw if r is not None]
-    if not results:
-        print("No valid fits completed.")
+    if not files_to_run:
+        print("All candidate files already processed. Use a clean file to re-run.")
         return
 
-    df = pd.DataFrame(results)
-    output_csv = "outputs/csvs/allcfa_results.csv"
-    df.to_csv(output_csv, index=False)
-    
-    # Plotting (Filtered for Age comparison)
-    plot_df = df.dropna(subset=['full_age', 'nuis_age'])
-    if plot_df.empty:
-        print("DataFrame is empty after dropping NaNs for plotting.")
-        return
+    print(f"Processing {len(files_to_run)} files (out of {len(flm_files)}) on {N_CORES} cores...")
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10), sharex=True, gridspec_kw={'height_ratios': [3, 1]})
-    
-    ax1.errorbar(plot_df['true_age'], plot_df['full_age'], yerr=plot_df.get('full_age_err', 0), fmt='o', label='Full (x0 sampled)', color='blue', alpha=0.5)
-    ax1.errorbar(plot_df['true_age'], plot_df['nuis_age'], yerr=plot_df.get('nuis_age_err', 0), fmt='s', label='Nuisance (x0 marginalized)', color='red', alpha=0.5)
-    
-    lims = [min(plot_df['true_age'].min(), plot_df['full_age'].min()) - 5, max(plot_df['true_age'].max(), plot_df['full_age'].max()) + 5]
-    ax1.plot(lims, lims, 'k--', label='1:1 Line')
-    ax1.set_ylabel('Inferred Age (days)')
-    ax1.set_title(f'Method Comparison: CfA Spectra (N={len(plot_df)})')
-    ax1.legend()
-    ax1.grid(True, ls=':', alpha=0.6)
-    
-    ax2.errorbar(plot_df['true_age'], plot_df['full_age'] - plot_df['true_age'], yerr=plot_df.get('full_age_err', 0), fmt='o', color='blue', alpha=0.5)
-    ax2.errorbar(plot_df['true_age'], plot_df['nuis_age'] - plot_df['true_age'], yerr=plot_df.get('nuis_age_err', 0), fmt='s', color='red', alpha=0.5)
-    ax2.axhline(0, color='k', ls='--')
-    ax2.set_xlabel('True Age (days)')
-    ax2.set_ylabel('Residual (days)')
-    ax2.grid(True, ls=':', alpha=0.6)
-    
-    plt.tight_layout()
-    plt.savefig("outputs/plots/allcfa_comparison.png")
-    
-    print(f"\nProcessing complete. Results: {output_csv}, Plot: outputs/plots/allcfa_comparison.png")
+    # Process in chunks to allow periodic saving (checkpointing)
+    chunk_size = 50 
+    for i in range(0, len(files_to_run), chunk_size):
+        chunk = files_to_run[i:i + chunk_size]
+        print(f"\n--- Processing Chunk {i//chunk_size + 1} ({i} to {i+len(chunk)}) ---")
+        
+        results_raw = Parallel(n_jobs=N_CORES)(
+            delayed(process_single_file)(f, sn_params) for f in chunk
+        )
+        
+        new_results = [r for r in results_raw if r is not None]
+        if new_results:
+            new_df = pd.DataFrame(new_results)
+            if not existing_df.empty:
+                existing_df = pd.concat([existing_df, new_df], ignore_index=True)
+            else:
+                existing_df = new_df
+            
+            # Save checkpoint
+            existing_df.to_csv(output_csv, index=False)
+            print(f"Checkpoint saved: {len(existing_df)} total spectra in {output_csv}")
+
+    print(f"\nAll processing complete. Results: {output_csv}")
 
 if __name__ == "__main__":
     run_test()
