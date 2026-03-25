@@ -15,7 +15,7 @@ PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
 N_CORES = 16
-FORCE_RERUN = True
+FORCE_RERUN = False
 
 
 def parse_param_file(file_path):
@@ -83,8 +83,18 @@ def prior_transform(u, params, priors):
     return t
 
 
+_MODEL_CACHE = {}
+
+
+def get_model(model_name):
+    """Global model cache to prevent repeated object creation in parallel workers."""
+    if model_name not in _MODEL_CACHE:
+        _MODEL_CACHE[model_name] = sncosmo.Model(source=model_name)
+    return _MODEL_CACHE[model_name]
+
+
 def log_likelihood_full(t, params, wavelength, flux, flux_err, model_name, redshift):
-    model = sncosmo.Model(source=model_name)
+    model = get_model(model_name)
     if redshift is not None:
         model.set(z=redshift)
 
@@ -103,7 +113,7 @@ def log_likelihood_full(t, params, wavelength, flux, flux_err, model_name, redsh
 
 
 def log_likelihood_nuisance(t, params, wavelength, flux, flux_err, model_name, redshift):
-    model = sncosmo.Model(source=model_name)
+    model = get_model(model_name)
     if redshift is not None:
         model.set(z=redshift)
 
@@ -210,7 +220,7 @@ def process_single_file(filename, sn_params):
             mean_params = np.mean(samples, axis=0)
             p_dict_best = dict(zip(par_names, mean_params))
 
-            model = sncosmo.Model(source=MODEL_NAME)
+            model = get_model(MODEL_NAME)
             model.set(z=p['z'])
 
             if method == 'full':
