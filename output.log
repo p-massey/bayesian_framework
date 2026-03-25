@@ -1,90 +1,158 @@
 nohup: ignoring input
-FORCE_RERUN is True. Starting fresh run on all files.
+Found existing results. 297 spectra already processed.
 Pre-loading salt3 model to prevent race conditions...
-Processing 2603 files (out of 2603) on 16 cores...
+Processing 2306 files (out of 2603) on 16 cores...
 
 --- Processing Chunk 1 (0 to 50) ---
-Checkpoint saved: 2 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 2 (50 to 100) ---
-Checkpoint saved: 26 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 3 (100 to 150) ---
-Checkpoint saved: 52 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 4 (150 to 200) ---
-Checkpoint saved: 81 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 5 (200 to 250) ---
-Checkpoint saved: 123 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 6 (250 to 300) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 159 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 7 (300 to 350) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 203 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 8 (350 to 400) ---
-Checkpoint saved: 248 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 9 (400 to 450) ---
-Checkpoint saved: 297 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 10 (450 to 500) ---
 /c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
   warnings.warn('The slice sample interval was expanded more '
 /c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
   warnings.warn('Enabling doubling strategy of slice '
-free(): invalid next size (fast)
-Fatal Python error: Aborted
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 337 total spectra in outputs/csvs/allcfa_results.csv
 
-Current thread 0x00007f12c8080740 (most recent call first):
-  File "/c4/pmassey/empirical_template_fitting/bayesian_framework/src/test_methods.py", line 286 in process_single_file
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 607 in <listcomp>
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 607 in __call__
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/externals/loky/process_executor.py", line 291 in __call__
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/externals/loky/process_executor.py", line 490 in _process_worker
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/multiprocessing/process.py", line 108 in run
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/multiprocessing/process.py", line 314 in _bootstrap
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/externals/loky/backend/popen_loky_posix.py", line 180 in <module>
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/runpy.py", line 86 in _run_code
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/runpy.py", line 196 in _run_module_as_main
+--- Processing Chunk 5 (200 to 250) ---
+Checkpoint saved: 381 total spectra in outputs/csvs/allcfa_results.csv
 
-Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator, scipy._lib._ccallback_c, scipy.special._ufuncs_cxx, scipy.special._ufuncs, charset_normalizer.md, charset_normalizer.cd, scipy.special._specfun, scipy.special._comb, scipy.linalg._fblas, scipy.linalg._flapack, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_sqrtm_triu, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.sparse.csgraph._tools, scipy.sparse.csgraph._shortest_path, scipy.sparse.csgraph._traversal, scipy.sparse.csgraph._min_spanning_tree, scipy.sparse.csgraph._flow, scipy.sparse.csgraph._matching, scipy.sparse.csgraph._reordering, scipy.special._ellip_harm_2, h5py._errors, h5py.defs, h5py._objects, h5py.h5, h5py.utils, h5py.h5t, h5py.h5s, h5py.h5ac, h5py.h5p, h5py.h5r, h5py._npystrings, h5py._proxy, h5py._conv, h5py.h5z, h5py.h5a, h5py.h5d, h5py.h5ds, h5py.h5g, h5py.h5i, h5py.h5o, h5py.h5f, h5py.h5fd, h5py.h5pl, h5py.h5l, h5py._selector, scipy.spatial._ckdtree, scipy._lib.messagestream, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._distance_wrap, scipy.spatial._hausdorff, scipy.spatial.transform._rotation, scipy.cluster._vq, scipy.cluster._hierarchy, scipy.cluster._optimal_leaf_ordering, erfa.ufunc, astropy.table._column_mixins, astropy.table._np_utils, astropy.io.fits._utils, astropy.io.fits.hdu.compressed._compression, yaml._yaml, astropy.time._parse_times, astropy.utils.xml._iterparser, astropy.io.votable.tablewriter, astropy.io.ascii.cparser, scipy.interpolate._fitpack, scipy.interpolate._dfitpack, scipy.optimize._group_columns, scipy.optimize._trlib._trlib, scipy.optimize._lbfgsb, _moduleTNC, scipy.optimize._moduleTNC, scipy.optimize._cobyla, scipy.optimize._slsqp, scipy.optimize._minpack, scipy.optimize._lsq.givens_elimination, scipy.optimize._zeros, scipy.optimize._cython_nnls, scipy._lib._uarray._uarray, scipy.linalg._decomp_interpolative, scipy.optimize._bglu_dense, scipy.optimize._lsap, scipy.optimize._direct, scipy.interpolate._dierckx, scipy.interpolate._ppoly, scipy.interpolate._interpnd, scipy.interpolate._rbfinterp_pythran, scipy.interpolate._rgi_cython, scipy.interpolate._bspl, scipy.integrate._odepack, scipy.integrate._quadpack, scipy.integrate._vode, scipy.integrate._dop, scipy.integrate._lsoda, extinction, astropy.wcs._wcs, astropy.cosmology.flrw.scalar_inv_efuncs, sncosmo.salt2utils (total: 124)
-Traceback (most recent call last):
-  File "/c4/pmassey/empirical_template_fitting/bayesian_framework/src/test_methods.py", line 344, in <module>
-    run_test()
-  File "/c4/pmassey/empirical_template_fitting/bayesian_framework/src/test_methods.py", line 325, in run_test
-    results_raw = Parallel(n_jobs=N_CORES)(
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 2072, in __call__
-    return output if self.return_generator else list(output)
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 1682, in _get_outputs
-    yield from self._retrieve()
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 1784, in _retrieve
-    self._raise_error_fast()
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 1859, in _raise_error_fast
-    error_job.get_result(self.timeout)
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 758, in get_result
-    return self._return_or_raise()
-  File "/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/joblib/parallel.py", line 773, in _return_or_raise
-    raise self._result
-joblib.externals.loky.process_executor.TerminatedWorkerError: A worker process managed by the executor was unexpectedly terminated. This could be caused by a segmentation fault while calling the function or by an excessive memory usage causing the Operating System to kill the worker.
+--- Processing Chunk 6 (250 to 300) ---
+Checkpoint saved: 424 total spectra in outputs/csvs/allcfa_results.csv
 
-The exit codes of the workers are {SIGABRT(-6)}
-Detailed tracebacks of the workers should have been printed to stderr in the executor process if faulthandler was not disabled.
+--- Processing Chunk 7 (300 to 350) ---
+Checkpoint saved: 469 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 8 (350 to 400) ---
+Checkpoint saved: 505 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 9 (400 to 450) ---
+Checkpoint saved: 550 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 10 (450 to 500) ---
+Checkpoint saved: 557 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 11 (500 to 550) ---
+Checkpoint saved: 563 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 12 (550 to 600) ---
+Checkpoint saved: 606 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 13 (600 to 650) ---
+Checkpoint saved: 649 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 14 (650 to 700) ---
+Checkpoint saved: 692 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 15 (700 to 750) ---
+Checkpoint saved: 711 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 16 (750 to 800) ---
+Checkpoint saved: 749 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 17 (800 to 850) ---
+Checkpoint saved: 786 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 18 (850 to 900) ---
+Checkpoint saved: 831 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 19 (900 to 950) ---
+Checkpoint saved: 876 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 20 (950 to 1000) ---
+Checkpoint saved: 922 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 21 (1000 to 1050) ---
+Checkpoint saved: 926 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 22 (1050 to 1100) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 974 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 23 (1100 to 1150) ---
+Checkpoint saved: 1003 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 24 (1150 to 1200) ---
+Checkpoint saved: 1026 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 25 (1200 to 1250) ---
+Checkpoint saved: 1053 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 26 (1250 to 1300) ---
+Checkpoint saved: 1079 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 27 (1300 to 1350) ---
+Checkpoint saved: 1119 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 28 (1350 to 1400) ---
+Checkpoint saved: 1161 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 29 (1400 to 1450) ---
+Checkpoint saved: 1189 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 30 (1450 to 1500) ---
+Checkpoint saved: 1233 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 31 (1500 to 1550) ---
+Checkpoint saved: 1283 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 32 (1550 to 1600) ---
+Checkpoint saved: 1315 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 33 (1600 to 1650) ---
+Checkpoint saved: 1318 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 34 (1650 to 1700) ---
+Checkpoint saved: 1363 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 35 (1700 to 1750) ---
+Checkpoint saved: 1406 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 36 (1750 to 1800) ---
+Checkpoint saved: 1453 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 37 (1800 to 1850) ---
+Checkpoint saved: 1498 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 38 (1850 to 1900) ---
+Checkpoint saved: 1516 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 39 (1900 to 1950) ---
+Checkpoint saved: 1560 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 40 (1950 to 2000) ---
+Checkpoint saved: 1605 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 41 (2000 to 2050) ---
+Checkpoint saved: 1650 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 42 (2050 to 2100) ---
+Checkpoint saved: 1690 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 43 (2100 to 2150) ---
+Checkpoint saved: 1734 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 44 (2150 to 2200) ---
+Checkpoint saved: 1745 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 45 (2200 to 2250) ---
+Checkpoint saved: 1773 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 46 (2250 to 2300) ---
+Checkpoint saved: 1822 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 47 (2300 to 2306) ---
+Checkpoint saved: 1828 total spectra in outputs/csvs/allcfa_results.csv
+
+All processing complete. Results: outputs/csvs/allcfa_results.csv
