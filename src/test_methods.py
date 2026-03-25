@@ -14,7 +14,7 @@ SPECTRA_DIR = "data/all_spectra"
 PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
 NLIVE = 100
 MODEL_NAME = 'salt3'
-N_CORES = 1
+N_CORES = 16
 FORCE_RERUN = True
 
 
