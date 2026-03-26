@@ -142,7 +142,7 @@ def run_comparison():
     ax_resid.set_xlabel(r"Nested Sampling Age ($t_{Dynesty}$ [days])")
     ax_resid.set_ylabel(r"Residual (SNID-Dyn)")
     ax_resid.grid(True, alpha=0.3)
-    
+
     # Remove x-axis tick labels for the top plot
     plt.setp(ax_main.get_xticklabels(), visible=False)
 
@@ -156,6 +156,8 @@ def run_comparison():
     # Residual y-limits (centered around bias or 0)
     res_max = max(abs(residuals.max()), abs(residuals.min())) * 1.1
     ax_resid.set_ylim(-res_max, res_max)
+    ax_resid.set_ylim(-20, 20)
+
 
     plot_path = os.path.join(OUTPUT_DIR, 'snid_vs_dynesty_one_to_one_with_residuals.png')
     plt.savefig(plot_path, dpi=300, bbox_inches='tight')
