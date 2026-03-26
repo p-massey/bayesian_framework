@@ -114,3 +114,8 @@ plt.tight_layout()
 plot_path = os.path.join(output_dir, "filtered_cfa_comparison.png")
 plt.savefig(plot_path, dpi=300)
 print(f"\nPlot saved to: {plot_path}")
+
+# Save filtered data for other scripts
+filtered_csv_path = "outputs/csvs/allcfa_results_filtered.csv"
+df_filtered.to_csv(filtered_csv_path, index=False)
+print(f"Filtered results saved to: {filtered_csv_path}")
