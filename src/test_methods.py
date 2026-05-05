@@ -16,7 +16,7 @@ PROPS_FILE = os.path.join("data", "spectra_properties.csv")
 NLIVE = 100
 MODEL_NAME = 'salt3'
 N_CORES = 16
-FORCE_RERUN = False
+FORCE_RERUN = True 
 STD_THRESHOLD = 1e-4  # Flag fits as failed if std dev falls below this
 
 
