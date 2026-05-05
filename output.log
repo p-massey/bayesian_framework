@@ -1,158 +1,123 @@
 nohup: ignoring input
-Found existing results. 297 spectra already processed.
+Loaded properties. Found 1566 N/HV spectra.
+FORCE_RERUN is True. Starting fresh run on all files.
 Pre-loading salt3 model to prevent race conditions...
-Processing 2306 files (out of 2603) on 16 cores...
+Processing 1566 files (out of 1566) on 16 cores...
 
 --- Processing Chunk 1 (0 to 50) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 6 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 2 (50 to 100) ---
+Checkpoint saved: 33 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 3 (100 to 150) ---
+Checkpoint saved: 53 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 4 (150 to 200) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
-  warnings.warn('The slice sample interval was expanded more '
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
-  warnings.warn('Enabling doubling strategy of slice '
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
-  warnings.warn(
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
-  warnings.warn(
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 337 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 98 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 5 (200 to 250) ---
-Checkpoint saved: 381 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 6 (250 to 300) ---
-Checkpoint saved: 424 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 7 (300 to 350) ---
-Checkpoint saved: 469 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 8 (350 to 400) ---
-Checkpoint saved: 505 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 9 (400 to 450) ---
-Checkpoint saved: 550 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 10 (450 to 500) ---
-Checkpoint saved: 557 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 11 (500 to 550) ---
-Checkpoint saved: 563 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 12 (550 to 600) ---
-Checkpoint saved: 606 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 13 (600 to 650) ---
-Checkpoint saved: 649 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 14 (650 to 700) ---
-Checkpoint saved: 692 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 15 (700 to 750) ---
-Checkpoint saved: 711 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 16 (750 to 800) ---
-Checkpoint saved: 749 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 17 (800 to 850) ---
-Checkpoint saved: 786 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 18 (850 to 900) ---
-Checkpoint saved: 831 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 19 (900 to 950) ---
-Checkpoint saved: 876 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 20 (950 to 1000) ---
-Checkpoint saved: 922 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 21 (1000 to 1050) ---
-Checkpoint saved: 926 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 22 (1050 to 1100) ---
 /c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
   warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 974 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 144 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 6 (250 to 300) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 194 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 7 (300 to 350) ---
+Checkpoint saved: 244 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 8 (350 to 400) ---
+Checkpoint saved: 292 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 9 (400 to 450) ---
+Checkpoint saved: 320 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 10 (450 to 500) ---
+Checkpoint saved: 364 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 11 (500 to 550) ---
+Checkpoint saved: 414 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 12 (550 to 600) ---
+Checkpoint saved: 462 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 13 (600 to 650) ---
+Checkpoint saved: 512 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 14 (650 to 700) ---
+Checkpoint saved: 562 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 15 (700 to 750) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+Checkpoint saved: 612 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 16 (750 to 800) ---
+Checkpoint saved: 642 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 17 (800 to 850) ---
+Checkpoint saved: 692 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 18 (850 to 900) ---
+Checkpoint saved: 742 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 19 (900 to 950) ---
+Checkpoint saved: 779 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 20 (950 to 1000) ---
+Checkpoint saved: 829 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 21 (1000 to 1050) ---
+Checkpoint saved: 879 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 22 (1050 to 1100) ---
+Checkpoint saved: 912 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 23 (1100 to 1150) ---
-Checkpoint saved: 1003 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 931 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 24 (1150 to 1200) ---
-Checkpoint saved: 1026 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 981 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 25 (1200 to 1250) ---
-Checkpoint saved: 1053 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1031 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 26 (1250 to 1300) ---
-Checkpoint saved: 1079 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1065 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 27 (1300 to 1350) ---
-Checkpoint saved: 1119 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1115 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 28 (1350 to 1400) ---
-Checkpoint saved: 1161 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1165 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 29 (1400 to 1450) ---
-Checkpoint saved: 1189 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1215 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 30 (1450 to 1500) ---
-Checkpoint saved: 1233 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1236 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 31 (1500 to 1550) ---
-Checkpoint saved: 1283 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1285 total spectra in outputs/csvs/allcfa_results.csv
 
---- Processing Chunk 32 (1550 to 1600) ---
-Checkpoint saved: 1315 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 33 (1600 to 1650) ---
-Checkpoint saved: 1318 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 34 (1650 to 1700) ---
-Checkpoint saved: 1363 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 35 (1700 to 1750) ---
-Checkpoint saved: 1406 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 36 (1750 to 1800) ---
-Checkpoint saved: 1453 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 37 (1800 to 1850) ---
-Checkpoint saved: 1498 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 38 (1850 to 1900) ---
-Checkpoint saved: 1516 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 39 (1900 to 1950) ---
-Checkpoint saved: 1560 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 40 (1950 to 2000) ---
-Checkpoint saved: 1605 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 41 (2000 to 2050) ---
-Checkpoint saved: 1650 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 42 (2050 to 2100) ---
-Checkpoint saved: 1690 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 43 (2100 to 2150) ---
-Checkpoint saved: 1734 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 44 (2150 to 2200) ---
-Checkpoint saved: 1745 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 45 (2200 to 2250) ---
-Checkpoint saved: 1773 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 46 (2250 to 2300) ---
-Checkpoint saved: 1822 total spectra in outputs/csvs/allcfa_results.csv
-
---- Processing Chunk 47 (2300 to 2306) ---
-Checkpoint saved: 1828 total spectra in outputs/csvs/allcfa_results.csv
+--- Processing Chunk 32 (1550 to 1566) ---
+Checkpoint saved: 1301 total spectra in outputs/csvs/allcfa_results.csv
 
 All processing complete. Results: outputs/csvs/allcfa_results.csv
