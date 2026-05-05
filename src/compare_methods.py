@@ -39,16 +39,11 @@ def run_comparison():
     # Clean up
     df_merged = df_merged.dropna(subset=['nuis_age', 'bootstrap_age', 'true_age'])
     
-    # 3. Apply Filtering (Same cuts as before)
-    # Phase range -15 to 50
-    # SNR >= 10
-    # Exclude 91bg and pec
+    # 3. Apply Filtering (Strict 'N' and 'HV' subtypes, -15 to 25 range)
     mask = (
-        (df_merged['true_age'] >= -15) & (df_merged['true_age'] <= 50) &
+        (df_merged['true_age'] >= -15) & (df_merged['true_age'] <= 25) &
         (df_merged['SNR'] >= 10) &
-        (df_merged['Subtype'] != '91bg') &
-        (df_merged['Subtype'] != 'pec') &
-        (df_merged['Subtype'].notna())
+        (df_merged['Subtype'].isin(['N', 'HV']))
     )
     df_filtered = df_merged[mask].copy()
     
@@ -79,7 +74,7 @@ def run_comparison():
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12), sharex=True, gridspec_kw={'height_ratios': [2.1, 1]})
 
     # Determine limits
-    min_age, max_age = -15, 50
+    min_age, max_age = -15, 25
 
     # Top Panel: Inferred Age vs True Age
     ax1.errorbar(
@@ -110,7 +105,7 @@ def run_comparison():
     ax1.legend(loc='lower right')
     ax1.grid(True, alpha=0.3)
     ax1.set_xlim(min_age, max_age)
-    ax1.set_ylim(-20, 55)
+    ax1.set_ylim(min_age, max_age)
 
     # Bottom Panel: Residuals
     ax2.errorbar(

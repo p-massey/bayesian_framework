@@ -10,7 +10,7 @@ STYLE_FILE = 'assets/plotting_style.mplstyle'
 
 # Use same filtering as in the analysis scripts
 PHASE_MIN = -15
-PHASE_MAX = 30
+PHASE_MAX = 25
 BIN_SIZE = 5
 
 def calculate_binned_metrics(df, age_col, true_age_col='true_age'):

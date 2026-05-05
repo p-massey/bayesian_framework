@@ -22,8 +22,8 @@ def run_binned_comparison():
     df = pd.read_csv(MERGED_FILE)
     
     # 2. Define Bins
-    # Covering -15 to 50 days (to match current cuts)
-    bin_edges = np.arange(-15, 51, 5)
+    # Covering -15 to 25 days (to match current cuts)
+    bin_edges = np.arange(-15, 26, 5)
     df['age_bin'] = pd.cut(df['true_age'], bins=bin_edges)
     
     # 3. Calculate Binned Statistics

@@ -46,12 +46,18 @@ def run_comparison():
     
     # 3. Filtering
     mask = (
-        (df_merged[true_age_col] >= -15) & (df_merged[true_age_col] <= 50) &
-        (df_merged['nuis_age'] <= 35) &
+        (df_merged[true_age_col] >= -15) & (df_merged[true_age_col] <= 25) &
+        (df_merged['nuis_age'] >= -15) & (df_merged['nuis_age'] <= 25) &
         (df_merged[snr_col] >= 10) &
-        (df_merged[subtype_col] != '91bg') &
-        (df_merged[subtype_col] != 'pec')
+        (df_merged[subtype_col].isin(['N', 'HV']))
     )
+    
+    # Add failed fit check if columns exist
+    if 'full_failed' in df_merged.columns:
+        mask = mask & (df_merged['full_failed'] == False)
+    if 'nuis_failed' in df_merged.columns:
+        mask = mask & (df_merged['nuis_failed'] == False)
+
     df_filtered = df_merged[mask].copy()
     
     if df_filtered.empty:
@@ -65,7 +71,7 @@ def run_comparison():
     bias = residuals.mean()
     std_resid = residuals.std()
 
-    print(f"--- SNID vs Dynesty Comparison (N={len(df_filtered)}, nuis_age <= 35) ---")
+    print(f"--- SNID vs Dynesty Comparison (N={len(df_filtered)}, phase range -15 to 25) ---")
     print(f"Pearson Correlation: {corr:.3f}")
     print(f"RMSE: {rmse:.3f}")
     print(f"Bias (SNID - Dynesty): {bias:.3f}")
@@ -75,6 +81,7 @@ def run_comparison():
     if os.path.exists(STYLE_FILE):
         plt.style.use(STYLE_FILE)
     
+    # --- Plot 1: SNID vs Dynesty ---
     # Use GridSpec for better control over subplot ratios
     fig = plt.figure(figsize=(10, 10))
     gs = GridSpec(2, 1, height_ratios=[3, 1], hspace=0.05)
@@ -83,8 +90,8 @@ def run_comparison():
     ax_resid = fig.add_subplot(gs[1], sharex=ax_main)
 
     # Determine limits
-    min_val = -5
-    max_val = 20
+    min_val = -15
+    max_val = 25
 
     # --- Main Plot ---
     scatter = ax_main.scatter(
@@ -104,7 +111,7 @@ def run_comparison():
     ax_main.plot([min_val, max_val], [min_val, max_val], color='black', linestyle='--', alpha=0.7, label='1:1 Line')
     
     ax_main.set_ylabel(r"SNID Age ($t_{SNID}$ [days])")
-    ax_main.set_title(fr"SNID vs Nested Sampling Fit (N={len(df_filtered)}, $t_{{Dynesty}} \leq 35d$)")
+    ax_main.set_title(fr"SNID vs Nested Sampling Fit (N={len(df_filtered)}, Subtypes: N, HV)")
     ax_main.grid(True, alpha=0.3)
     
     # Metrics Text Box
@@ -115,7 +122,7 @@ def run_comparison():
                 va='top', ha='left', fontsize=11,
                 bbox=dict(boxstyle="round,pad=0.5", fc="white", ec="black", alpha=0.8))
 
-    # Add colorbar (attach to BOTH axes to ensure they shrink together and align)
+    # Add colorbar
     cbar = fig.colorbar(scatter, ax=[ax_main, ax_resid], pad=0.02, aspect=30)
     cbar.set_label('True Age (Light Curve) [days]')
 
@@ -130,38 +137,64 @@ def run_comparison():
     ax_resid.axhline(0, color='black', linestyle='-', alpha=0.8)
     ax_resid.axhline(bias, color='red', linestyle='--', alpha=0.6, label=f'Bias ({bias:.2f})')
     
-    # Add error bars for residuals if available
-    if 'nuis_age_err' in df_filtered.columns and 'snid_std_dev' in df_filtered.columns:
-        resid_err = np.sqrt(df_filtered['nuis_age_err']**2 + df_filtered['snid_std_dev']**2)
-        ax_resid.errorbar(
-            df_filtered['nuis_age'], residuals,
-            yerr=resid_err,
-            fmt='none', color='gray', alpha=0.1, zorder=0
-        )
-
     ax_resid.set_xlabel(r"Nested Sampling Age ($t_{Dynesty}$ [days])")
     ax_resid.set_ylabel(r"Residual (SNID-Dyn)")
     ax_resid.grid(True, alpha=0.3)
 
-    # Remove x-axis tick labels for the top plot
     plt.setp(ax_main.get_xticklabels(), visible=False)
-
-    # Legend for bias
     ax_resid.legend(loc='upper right', fontsize=9)
 
-    # Set limits
     ax_main.set_xlim(min_val, max_val)
     ax_main.set_ylim(min_val, max_val)
-    
-    # Residual y-limits (centered around bias or 0)
-    res_max = max(abs(residuals.max()), abs(residuals.min())) * 1.1
-    ax_resid.set_ylim(-res_max, res_max)
-    ax_resid.set_ylim(-20, 20)
-
+    ax_resid.set_ylim(-15, 15)
 
     plot_path = os.path.join(OUTPUT_DIR, 'snid_vs_dynesty_one_to_one_with_residuals.png')
     plt.savefig(plot_path, dpi=300, bbox_inches='tight')
     print(f"One-to-one plot with residuals saved to {plot_path}")
+
+    # --- Plot 2: Found vs True Age (Both series) ---
+    fig2 = plt.figure(figsize=(10, 10))
+    gs2 = GridSpec(2, 1, height_ratios=[3, 1], hspace=0.05)
+    
+    ax2_main = fig2.add_subplot(gs2[0])
+    ax2_resid = fig2.add_subplot(gs2[1], sharex=ax2_main)
+
+    true_age = df_filtered[true_age_col]
+    
+    # Dynesty series
+    ax2_main.scatter(true_age, df_filtered['nuis_age'], label='Dynesty', alpha=0.5, color='blue', s=25)
+    # SNID series
+    ax2_main.scatter(true_age, df_filtered['bootstrap_age'], label='SNID', alpha=0.5, color='red', s=25)
+    
+    min_t = -15
+    max_t = 25
+    ax2_main.plot([min_t, max_t], [min_t, max_t], 'k--', alpha=0.7, label='1:1 Line')
+    
+    ax2_main.set_ylabel("Inferred Age [days]")
+    ax2_main.set_title(fr"Found vs True Age (N={len(df_filtered)}, Subtypes: N, HV)")
+    ax2_main.legend()
+    ax2_main.grid(True, alpha=0.3)
+    ax2_main.set_xlim(min_t, max_t)
+    ax2_main.set_ylim(min_t, max_t)
+
+    # Residuals
+    res_dyn = df_filtered['nuis_age'] - true_age
+    res_snid = df_filtered['bootstrap_age'] - true_age
+    
+    ax2_resid.scatter(true_age, res_dyn, alpha=0.4, color='blue', s=20)
+    ax2_resid.scatter(true_age, res_snid, alpha=0.4, color='red', s=20)
+    
+    ax2_resid.axhline(0, color='black', linestyle='-')
+    ax2_resid.set_xlabel("True Age (Light Curve) [days]")
+    ax2_resid.set_ylabel("Residual (Found - True)")
+    ax2_resid.grid(True, alpha=0.3)
+    ax2_resid.set_ylim(-15, 15)
+
+    plt.setp(ax2_main.get_xticklabels(), visible=False)
+    
+    plot_path2 = os.path.join(OUTPUT_DIR, 'found_vs_true_age_comparison.png')
+    plt.savefig(plot_path2, dpi=300, bbox_inches='tight')
+    print(f"Found vs True plot saved to {plot_path2}")
 
 if __name__ == "__main__":
     run_comparison()

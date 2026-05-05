@@ -12,10 +12,12 @@ from functools import partial
 # --- CONFIGURATION ---
 SPECTRA_DIR = "data/all_spectra"
 PARAM_FILE = os.path.join("data", "cfasnIa_param.dat")
+PROPS_FILE = os.path.join("data", "spectra_properties.csv")
 NLIVE = 100
 MODEL_NAME = 'salt3'
 N_CORES = 16
 FORCE_RERUN = False
+STD_THRESHOLD = 1e-4  # Flag fits as failed if std dev falls below this
 
 
 def parse_param_file(file_path):
@@ -239,11 +241,16 @@ def process_single_file(filename, sn_params):
             res[f'{method}_chi2'] = best_chisq
             res[f'{method}_ndof'] = len(wave) - len(par_names)
 
+            failed = False
             for i, name in enumerate(par_names):
                 s = samples[:, i]
                 mean, std = np.mean(s), np.std(s)
                 median = np.median(s)
                 q16, q84 = np.percentile(s, [16, 84])
+
+                # Check for failed convergence (std dev too low)
+                if name in ['t0', 'x1', 'c'] and std < STD_THRESHOLD:
+                    failed = True
 
                 if name == 't0':
                     res[f'{method}_age'] = -mean
@@ -251,6 +258,8 @@ def process_single_file(filename, sn_params):
                     res[f'{method}_t0_mean'] = mean
                     res[f'{method}_t0_std'] = std
                     res[f'{method}_t0_median'] = median
+                    res[f'{method}_t0_q16'] = q16
+                    res[f'{method}_t0_q84'] = q84
                 elif name == 'log10_x0':
                     x0_samples = 10 ** s
                     res[f'{method}_x0_mean'] = np.mean(x0_samples)
@@ -264,6 +273,8 @@ def process_single_file(filename, sn_params):
                     res[f'{method}_{name}_median'] = median
                     res[f'{method}_{name}_q16'] = q16
                     res[f'{method}_{name}_q84'] = q84
+
+            res[f'{method}_failed'] = failed
 
             if method == 'nuis':
                 x0_list = []
@@ -294,6 +305,7 @@ def process_single_file(filename, sn_params):
         except Exception as e:
             # print(f"Error fitting {filename} with {method}: {e}")
             res[f'{method}_age'] = np.nan
+            res[f'{method}_failed'] = True
 
     return res
 
@@ -304,7 +316,20 @@ def run_test():
     output_csv = "outputs/csvs/allcfa_results.csv"
 
     sn_params = parse_param_file(PARAM_FILE)
+    
+    # Load subtype properties
+    if os.path.exists(PROPS_FILE):
+        props_df = pd.read_csv(PROPS_FILE)
+        allowed_files = set(props_df[props_df['Subtype'].isin(['N', 'HV'])]['Filename'].tolist())
+        print(f"Loaded properties. Found {len(allowed_files)} N/HV spectra.")
+    else:
+        print(f"Warning: {PROPS_FILE} not found. No subtype filtering applied.")
+        allowed_files = None
+
     flm_files = sorted([f for f in os.listdir(SPECTRA_DIR) if f.endswith(('.flm', '.dat'))])
+    
+    if allowed_files is not None:
+        flm_files = [f for f in flm_files if f in allowed_files]
 
     if os.path.exists(output_csv) and not FORCE_RERUN:
         existing_df = pd.read_csv(output_csv)

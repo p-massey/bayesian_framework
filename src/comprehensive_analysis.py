@@ -15,7 +15,7 @@ BIN_CONFIGS = [
 ]
 
 PHASE_MIN = -15
-PHASE_MAX = 30
+PHASE_MAX = 25
 
 def calculate_binned_metrics(df, age_col, err_col, true_age_col='true_age'):
     # Calculate residuals for the whole dataframe first

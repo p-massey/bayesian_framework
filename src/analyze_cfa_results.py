@@ -25,17 +25,22 @@ else:
     print(f"Warning: {style_file} not found, using default style.")
 
 # Filtering
-# 1. Phase range -20 to 50
+# 1. Phase range -15 to 25
 # 2. SNR >= 10
-# 3. Exclude 91bg and pec (unknown/peculiar)
-# 4. Handle NaN in Subtype if necessary (usually normal Ia if not specified, but let's be safe)
+# 3. Strictly 'N' and 'HV' subtypes
+# 4. Exclude failed fits
 mask = (
-    (df['true_age'] >= -20) & (df['true_age'] <= 50) &
+    (df['true_age'] >= -15) & (df['true_age'] <= 25) &
     (df['SNR'] >= 10) &
-    (df['Subtype'] != '91bg') &
-    (df['Subtype'] != 'pec') &
-    (df['Subtype'].notna())
+    (df['Subtype'].isin(['N', 'HV']))
 )
+
+# Add failed fit check if columns exist
+if 'full_failed' in df.columns:
+    mask = mask & (df['full_failed'] == False)
+if 'nuis_failed' in df.columns:
+    mask = mask & (df['nuis_failed'] == False)
+
 df_filtered = df[mask].copy()
 
 # Calculations
@@ -57,7 +62,7 @@ for method in ['full', 'nuis']:
         'rmse': rmse
     }
 
-print(f"Analysis for phases -20 to 50 days, SNR >= 10, excluding 91bg/pec (N={len(df_filtered)}):")
+print(f"Analysis for phases -15 to 25 days, SNR >= 10, strictly N/HV subtypes (N={len(df_filtered)}):")
 for method, stats in results.items():
     print(f"\nMethod: {method}")
     print(f"  Mean Offset: {stats['mean_offset']:.3f} days")
@@ -74,12 +79,12 @@ ax1.errorbar(df_filtered['true_age'], df_filtered['nuis_age'], yerr=df_filtered[
              fmt='s', markersize=3, label=f"Nuisance (RMSE={results['nuis']['rmse']:.2f})", alpha=0.4, color='red', capsize=0)
 
 # 1:1 Line
-lims = [-25, 55]
+lims = [-20, 30]
 ax1.plot(lims, lims, 'k--', alpha=0.7, label='1:1 Line')
 ax1.set_xlim(lims)
 ax1.set_ylim(lims)
 ax1.set_ylabel('Inferred Age (days)')
-ax1.set_title(f'CfA Spectra: -20 < Phase < 50, SNR >= 10, No 91bg/pec (N={len(df_filtered)})')
+ax1.set_title(f'CfA Spectra: -15 < Phase < 25, SNR >= 10, N/HV (N={len(df_filtered)})')
 ax1.legend(loc='lower right')
 ax1.grid(True, ls=':', alpha=0.6)
 
