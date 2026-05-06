@@ -123,7 +123,7 @@ def log_likelihood_nuisance(t, params, wavelength, flux, flux_err, model_name, r
     model.set(**p_dict)
     try:
         model.set(x0=1.0)
-        m_flux_unit = model.flux(0.0, wavelength)
+        m_flux_unit = model.flux(p_dict['t0'], wavelength)
         w = 1.0 / flux_err ** 2
         num = np.sum(flux * m_flux_unit * w)
         den = np.sum(m_flux_unit ** 2 * w)

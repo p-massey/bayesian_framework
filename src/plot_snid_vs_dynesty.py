@@ -6,7 +6,7 @@ from scipy.stats import pearsonr
 from matplotlib.gridspec import GridSpec
 
 # Configuration
-DYNESTY_FILE = 'outputs/csvs/allcfa_results_filtered.csv'
+DYNESTY_FILE = 'outputs/csvs/allcfa_results.csv'
 SNID_FILE = 'outputs/method_comparison/cfa_SNID_results.csv'
 OUTPUT_DIR = 'outputs/method_comparison'
 STYLE_FILE = 'assets/plotting_style.mplstyle'
