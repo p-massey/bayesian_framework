@@ -13,15 +13,7 @@ STYLE_FILE = 'assets/plotting_style.mplstyle'
 
 def run_comparison():
     # 1. Load Data
-    if not os.path.exists(DYNESTY_FILE):
-        # Fallback to unfiltered if filtered doesn't exist
-        DYNESTY_FILE_ALT = 'outputs/csvs/allcfa_results.csv'
-        if not os.path.exists(DYNESTY_FILE_ALT):
-            print(f"Error: Neither {DYNESTY_FILE} nor {DYNESTY_FILE_ALT} found.")
-            return
-        df_dyn = pd.read_csv(DYNESTY_FILE_ALT)
-    else:
-        df_dyn = pd.read_csv(DYNESTY_FILE)
+    df_dyn = pd.read_csv(DYNESTY_FILE)
 
     if not os.path.exists(SNID_FILE):
         print(f"Error: {SNID_FILE} not found.")
@@ -41,22 +33,20 @@ def run_comparison():
     subtype_col = 'Subtype_snid' if 'Subtype_snid' in df_merged.columns else 'Subtype'
     true_age_col = 'true_age_dyn' if 'true_age_dyn' in df_merged.columns else 'true_age'
 
+    # print(df_merged.head())
+
     # Clean up
-    df_merged = df_merged.dropna(subset=['nuis_age', 'bootstrap_age'])
-    
+    df_merged = df_merged.dropna(subset=['age_fit', 'bootstrap_age'])
+
     # 3. Filtering
     mask = (
         (df_merged[true_age_col] >= -15) & (df_merged[true_age_col] <= 25) &
-        (df_merged['nuis_age'] >= -15) & (df_merged['nuis_age'] <= 25) &
+        (df_merged['age_fit'] >= -15) & (df_merged['age_fit'] <= 25) &
         (df_merged[snr_col] >= 10) &
+        (df_merged['failed'] == False) &
         (df_merged[subtype_col].isin(['N', 'HV']))
     )
-    
-    # Add failed fit check if columns exist
-    if 'full_failed' in df_merged.columns:
-        mask = mask & (df_merged['full_failed'] == False)
-    if 'nuis_failed' in df_merged.columns:
-        mask = mask & (df_merged['nuis_failed'] == False)
+
 
     df_filtered = df_merged[mask].copy()
     
@@ -65,8 +55,8 @@ def run_comparison():
         return
 
     # 4. Calculate Stats (Done AFTER filtering for nuis_age <= 35)
-    residuals = df_filtered['bootstrap_age'] - df_filtered['nuis_age']
-    corr, _ = pearsonr(df_filtered['nuis_age'], df_filtered['bootstrap_age'])
+    residuals = df_filtered['bootstrap_age'] - df_filtered['age_fit']
+    corr, _ = pearsonr(df_filtered['age_fit'], df_filtered['bootstrap_age'])
     rmse = np.sqrt((residuals**2).mean())
     bias = residuals.mean()
     std_resid = residuals.std()
@@ -95,17 +85,25 @@ def run_comparison():
 
     # --- Main Plot ---
     scatter = ax_main.scatter(
-        df_filtered['nuis_age'], df_filtered['bootstrap_age'],
+        df_filtered['age_fit'], df_filtered['bootstrap_age'],
         c=df_filtered[true_age_col], cmap='viridis',
         alpha=0.6, s=30, label='Spectra'
     )
     
     # Add error bars
-    if 'nuis_age_err' in df_filtered.columns and 'snid_std_dev' in df_filtered.columns:
+    if 'age_err' in df_filtered.columns and 'snid_std_dev' in df_filtered.columns:
         ax_main.errorbar(
-            df_filtered['nuis_age'], df_filtered['bootstrap_age'],
-            xerr=df_filtered['nuis_age_err'], yerr=df_filtered['snid_std_dev'],
-            fmt='none', color='gray', alpha=0.1, zorder=0
+            df_filtered['age_fit'], df_filtered['bootstrap_age'],
+            xerr=df_filtered['age_err'], yerr=df_filtered['snid_std_dev'],
+            fmt='none', color='gray', alpha=0.2, zorder=0
+        )
+        
+        # Combined error for residuals: sqrt(err1^2 + err2^2)
+        combined_err = np.sqrt(df_filtered['age_err']**2 + df_filtered['snid_std_dev']**2)
+        ax_resid.errorbar(
+            df_filtered['age_fit'], residuals,
+            yerr=combined_err,
+            fmt='none', color='gray', alpha=0.2, zorder=0
         )
 
     ax_main.plot([min_val, max_val], [min_val, max_val], color='black', linestyle='--', alpha=0.7, label='1:1 Line')
@@ -128,7 +126,7 @@ def run_comparison():
 
     # --- Residual Plot ---
     ax_resid.scatter(
-        df_filtered['nuis_age'], residuals,
+        df_filtered['age_fit'], residuals,
         c=df_filtered[true_age_col], cmap='viridis',
         alpha=0.6, s=30
     )
@@ -162,9 +160,17 @@ def run_comparison():
     true_age = df_filtered[true_age_col]
     
     # Dynesty series
-    ax2_main.scatter(true_age, df_filtered['nuis_age'], label='Dynesty', alpha=0.5, color='blue', s=25)
+    ax2_main.errorbar(
+        true_age, df_filtered['age_fit'], 
+        yerr=df_filtered['age_err'] if 'age_err' in df_filtered.columns else None,
+        label='Dynesty', alpha=0.5, color='blue', fmt='o', markersize=4, capsize=0
+    )
     # SNID series
-    ax2_main.scatter(true_age, df_filtered['bootstrap_age'], label='SNID', alpha=0.5, color='red', s=25)
+    ax2_main.errorbar(
+        true_age, df_filtered['bootstrap_age'], 
+        yerr=df_filtered['snid_std_dev'] if 'snid_std_dev' in df_filtered.columns else None,
+        label='SNID', alpha=0.5, color='red', fmt='o', markersize=4, capsize=0
+    )
     
     min_t = -15
     max_t = 25
@@ -178,11 +184,19 @@ def run_comparison():
     ax2_main.set_ylim(min_t, max_t)
 
     # Residuals
-    res_dyn = df_filtered['nuis_age'] - true_age
+    res_dyn = df_filtered['age_fit'] - true_age
     res_snid = df_filtered['bootstrap_age'] - true_age
     
-    ax2_resid.scatter(true_age, res_dyn, alpha=0.4, color='blue', s=20)
-    ax2_resid.scatter(true_age, res_snid, alpha=0.4, color='red', s=20)
+    ax2_resid.errorbar(
+        true_age, res_dyn, 
+        yerr=df_filtered['age_err'] if 'age_err' in df_filtered.columns else None,
+        alpha=0.4, color='blue', fmt='o', markersize=3, capsize=0
+    )
+    ax2_resid.errorbar(
+        true_age, res_snid, 
+        yerr=df_filtered['snid_std_dev'] if 'snid_std_dev' in df_filtered.columns else None,
+        alpha=0.4, color='red', fmt='o', markersize=3, capsize=0
+    )
     
     ax2_resid.axhline(0, color='black', linestyle='-')
     ax2_resid.set_xlabel("True Age (Light Curve) [days]")
