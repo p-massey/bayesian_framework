@@ -1,123 +1,879 @@
 nohup: ignoring input
-Loaded properties. Found 1566 N/HV spectra.
-FORCE_RERUN is True. Starting fresh run on all files.
-Pre-loading salt3 model to prevent race conditions...
-Processing 1566 files (out of 1566) on 16 cores...
+Found 2603 spectra matching the metadata CSV.
+FORCE_RERUN is True. Starting a fresh run.
+Pre-loading salt3 model...
+Processing 2603 files on 16 cores...
 
 --- Processing Chunk 1 (0 to 50) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 6 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 50 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 2 (50 to 100) ---
-Checkpoint saved: 33 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #94 (got 2 columns instead of 3)
+    Line #95 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #70 (got 2 columns instead of 3)
+    Line #74 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1502 (got 2 columns instead of 3)
+    Line #1506 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 100 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 3 (100 to 150) ---
-Checkpoint saved: 53 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #874 (got 2 columns instead of 3)
+    Line #878 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2259 (got 2 columns instead of 3)
+    Line #2263 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #390 (got 2 columns instead of 3)
+    Line #394 (got 2 columns instead of 3)
+    Line #1974 (got 2 columns instead of 3)
+    Line #1978 (got 2 columns instead of 3)
+    Line #2079 (got 2 columns instead of 3)
+    Line #2083 (got 2 columns instead of 3)
+    Line #2084 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 150 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 4 (150 to 200) ---
-Checkpoint saved: 98 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2556 (got 2 columns instead of 3)
+    Line #2560 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1524 (got 2 columns instead of 3)
+    Line #1525 (got 2 columns instead of 3)
+    Line #1528 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2057 (got 2 columns instead of 3)
+    Line #2061 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2251 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #691 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 200 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 5 (200 to 250) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 144 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 250 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 6 (250 to 300) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 194 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 300 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 7 (300 to 350) ---
-Checkpoint saved: 244 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2135 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2387 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #100 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 350 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 8 (350 to 400) ---
-Checkpoint saved: 292 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 400 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 9 (400 to 450) ---
-Checkpoint saved: 320 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 450 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 10 (450 to 500) ---
-Checkpoint saved: 364 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1903 (got 2 columns instead of 3)
+    Line #1907 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 500 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 11 (500 to 550) ---
-Checkpoint saved: 414 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #241 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 550 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 12 (550 to 600) ---
-Checkpoint saved: 462 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #336 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #14 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 600 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 13 (600 to 650) ---
-Checkpoint saved: 512 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1015 (got 2 columns instead of 3)
+    Line #1016 (got 2 columns instead of 3)
+    Line #1021 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #656 (got 2 columns instead of 3)
+    Line #1214 (got 2 columns instead of 3)
+    Line #1215 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #443 (got 2 columns instead of 3)
+    Line #444 (got 2 columns instead of 3)
+    Line #448 (got 2 columns instead of 3)
+    Line #449 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 650 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 14 (650 to 700) ---
-Checkpoint saved: 562 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1490 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #263 (got 2 columns instead of 3)
+    Line #266 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 700 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 15 (700 to 750) ---
-/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
-  warnings.warn("Weights do not sum to 1 and have been renormalized.")
-Checkpoint saved: 612 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #861 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 750 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 16 (750 to 800) ---
-Checkpoint saved: 642 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #479 (got 2 columns instead of 3)
+    Line #485 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #320 (got 2 columns instead of 3)
+    Line #324 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #65 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 800 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 17 (800 to 850) ---
-Checkpoint saved: 692 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #225 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 850 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 18 (850 to 900) ---
-Checkpoint saved: 742 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #70 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 900 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 19 (900 to 950) ---
-Checkpoint saved: 779 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 950 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 20 (950 to 1000) ---
-Checkpoint saved: 829 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1000 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 21 (1000 to 1050) ---
-Checkpoint saved: 879 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/sampler.py:1098: UserWarning: We have reached the plateau in the likelihood we are stopping sampling
+  warnings.warn(
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:194: RuntimeWarning: invalid value encountered in scalar divide
+  x0_best = np.sum(flux * m_flux_unit * w) / np.sum(m_flux_unit ** 2 * w)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1050 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 22 (1050 to 1100) ---
-Checkpoint saved: 912 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1100 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 23 (1100 to 1150) ---
-Checkpoint saved: 931 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1488 (got 2 columns instead of 3)
+    Line #1493 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 1150 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 24 (1150 to 1200) ---
-Checkpoint saved: 981 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #514 (got 2 columns instead of 3)
+    Line #518 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #34 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 1200 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 25 (1200 to 1250) ---
-Checkpoint saved: 1031 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #440 (got 2 columns instead of 3)
+    Line #444 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1250 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 26 (1250 to 1300) ---
-Checkpoint saved: 1065 total spectra in outputs/csvs/allcfa_results.csv
+Checkpoint saved: 1300 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 27 (1300 to 1350) ---
-Checkpoint saved: 1115 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1350 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 28 (1350 to 1400) ---
-Checkpoint saved: 1165 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #345 (got 2 columns instead of 3)
+    Line #346 (got 2 columns instead of 3)
+    Line #350 (got 2 columns instead of 3)
+    Line #479 (got 2 columns instead of 3)
+    Line #482 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #336 (got 2 columns instead of 3)
+    Line #339 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #689 (got 2 columns instead of 3)
+    Line #690 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2451 (got 2 columns instead of 3)
+    Line #2455 (got 2 columns instead of 3)
+    Line #2456 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1400 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 29 (1400 to 1450) ---
-Checkpoint saved: 1215 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #168 (got 2 columns instead of 3)
+    Line #174 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #116 (got 2 columns instead of 3)
+    Line #120 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1450 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 30 (1450 to 1500) ---
-Checkpoint saved: 1236 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1500 total spectra in outputs/csvs/allcfa_results.csv
 
 --- Processing Chunk 31 (1500 to 1550) ---
-Checkpoint saved: 1285 total spectra in outputs/csvs/allcfa_results.csv
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #740 (got 2 columns instead of 3)
+    Line #741 (got 2 columns instead of 3)
+    Line #745 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1690 (got 2 columns instead of 3)
+    Line #1691 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1550 total spectra in outputs/csvs/allcfa_results.csv
 
---- Processing Chunk 32 (1550 to 1566) ---
-Checkpoint saved: 1301 total spectra in outputs/csvs/allcfa_results.csv
+--- Processing Chunk 32 (1550 to 1600) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1600 total spectra in outputs/csvs/allcfa_results.csv
 
-All processing complete. Results: outputs/csvs/allcfa_results.csv
+--- Processing Chunk 33 (1600 to 1650) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1650 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 34 (1650 to 1700) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1700 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 35 (1700 to 1750) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1872 (got 2 columns instead of 3)
+    Line #1876 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #167 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1750 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 36 (1750 to 1800) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #604 (got 2 columns instead of 3)
+    Line #608 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 1800 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 37 (1800 to 1850) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #9 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2200 (got 2 columns instead of 3)
+    Line #2201 (got 2 columns instead of 3)
+    Line #2202 (got 2 columns instead of 3)
+    Line #2206 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #501 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 1850 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 38 (1850 to 1900) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #6 (got 2 columns instead of 3)
+    Line #7 (got 2 columns instead of 3)
+    Line #10 (got 2 columns instead of 3)
+    Line #11 (got 2 columns instead of 3)
+    Line #357 (got 2 columns instead of 3)
+    Line #361 (got 2 columns instead of 3)
+    Line #1274 (got 2 columns instead of 3)
+    Line #1280 (got 2 columns instead of 3)
+    Line #1938 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1752 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1507 (got 2 columns instead of 3)
+    Line #1511 (got 2 columns instead of 3)
+    Line #2204 (got 2 columns instead of 3)
+    Line #2209 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1900 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 39 (1900 to 1950) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1737 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #497 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2430 (got 2 columns instead of 3)
+    Line #2431 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 1950 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 40 (1950 to 2000) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2482 (got 2 columns instead of 3)
+    Line #2486 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2000 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 41 (2000 to 2050) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #855 (got 2 columns instead of 3)
+    Line #859 (got 2 columns instead of 3)
+    Line #957 (got 2 columns instead of 3)
+    Line #1818 (got 2 columns instead of 3)
+    Line #1819 (got 2 columns instead of 3)
+    Line #1823 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1866 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2050 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 42 (2050 to 2100) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #14 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2375 (got 2 columns instead of 3)
+    Line #2379 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #476 (got 2 columns instead of 3)
+    Line #968 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2100 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 43 (2100 to 2150) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #343 (got 2 columns instead of 3)
+    Line #349 (got 2 columns instead of 3)
+    Line #451 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #51 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #603 (got 2 columns instead of 3)
+    Line #606 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2150 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 44 (2150 to 2200) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #928 (got 2 columns instead of 3)
+    Line #931 (got 2 columns instead of 3)
+    Line #1638 (got 2 columns instead of 3)
+    Line #2445 (got 2 columns instead of 3)
+    Line #2449 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #966 (got 2 columns instead of 3)
+    Line #971 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2200 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 45 (2200 to 2250) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2250 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 46 (2250 to 2300) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/utils.py:1035: UserWarning: Weights do not sum to 1 and have been renormalized.
+  warnings.warn("Weights do not sum to 1 and have been renormalized.")
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1118 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #266 (got 2 columns instead of 3)
+    Line #362 (got 2 columns instead of 3)
+    Line #366 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2300 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 47 (2300 to 2350) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2534 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #944 (got 2 columns instead of 3)
+    Line #1572 (got 2 columns instead of 3)
+    Line #2494 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2350 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 48 (2350 to 2400) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2189 (got 2 columns instead of 3)
+    Line #2193 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2667 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1811 (got 2 columns instead of 3)
+    Line #1812 (got 2 columns instead of 3)
+    Line #1815 (got 2 columns instead of 3)
+    Line #1816 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 2400 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 49 (2400 to 2450) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #230 (got 2 columns instead of 3)
+    Line #233 (got 2 columns instead of 3)
+    Line #732 (got 2 columns instead of 3)
+    Line #736 (got 2 columns instead of 3)
+    Line #2206 (got 2 columns instead of 3)
+    Line #2211 (got 2 columns instead of 3)
+    Line #2212 (got 2 columns instead of 3)
+    Line #2213 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1879 (got 2 columns instead of 3)
+    Line #1883 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #14 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2450 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 50 (2450 to 2500) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1532 (got 2 columns instead of 3)
+    Line #1538 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2500 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 51 (2500 to 2550) ---
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #430 (got 2 columns instead of 3)
+    Line #434 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1578 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:1144: UserWarning: The slice sample interval was expanded more than 1000 times
+  warnings.warn('The slice sample interval was expanded more '
+/c4/pmassey/miniconda3/envs/testsuite/lib/python3.10/site-packages/dynesty/internal_samplers.py:839: UserWarning: Enabling doubling strategy of slice sampling from Neal(2003)
+  warnings.warn('Enabling doubling strategy of slice '
+Checkpoint saved: 2550 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 52 (2550 to 2600) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2440 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #1972 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 2600 total spectra in outputs/csvs/allcfa_results.csv
+
+--- Processing Chunk 53 (2600 to 2603) ---
+/c4/pmassey/empirical_template_fitting/bayesian_framework/src/salt3_fitting_group.py:22: ConversionWarning: Some errors were detected !
+    Line #2233 (got 2 columns instead of 3)
+    Line #2235 (got 2 columns instead of 3)
+    Line #2239 (got 2 columns instead of 3)
+  data = np.genfromtxt(file_path, invalid_raise=False)
+Checkpoint saved: 2603 total spectra in outputs/csvs/allcfa_results.csv
+
+All processing complete. Final results: outputs/csvs/allcfa_results.csv
