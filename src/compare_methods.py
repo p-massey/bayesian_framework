@@ -37,7 +37,7 @@ def run_comparison():
     df_merged = pd.merge(df_dyn, df_snid, on='filename_norm', suffixes=('_dyn', '_snid'))
     
     # Clean up
-    df_merged = df_merged.dropna(subset=['nuis_age', 'bootstrap_age', 'true_age'])
+    df_merged = df_merged.dropna(subset=['age_median', 'bootstrap_age', 'true_age'])
     
     # 3. Apply Filtering (Strict 'N' and 'HV' subtypes, -15 to 25 range)
     mask = (
@@ -53,7 +53,7 @@ def run_comparison():
 
     # 4. Calculate Metrics
     # Dynesty (Nuisance) vs SNID (Bootstrap)
-    sigma_n, rmse_n, bias_n = calculate_metrics(df_filtered['true_age'], df_filtered['nuis_age'])
+    sigma_n, rmse_n, bias_n = calculate_metrics(df_filtered['true_age'], df_filtered['age_median'])
     sigma_s, rmse_s, bias_s = calculate_metrics(df_filtered['true_age'], df_filtered['bootstrap_age'])
 
     print(f"--- Comparison Statistics (N={len(df_filtered)}) ---")
@@ -78,7 +78,7 @@ def run_comparison():
 
     # Top Panel: Inferred Age vs True Age
     ax1.errorbar(
-        df_filtered['true_age'], df_filtered['nuis_age'], yerr=df_filtered['nuis_age_err'],
+        df_filtered['true_age'], df_filtered['age_median'], yerr=df_filtered['age_err'],
         fmt='o', color='red', alpha=0.4, label='Dynesty (Nuisance)', capsize=0, markersize=3
     )
     ax1.errorbar(
@@ -109,7 +109,7 @@ def run_comparison():
 
     # Bottom Panel: Residuals
     ax2.errorbar(
-        df_filtered['true_age'], df_filtered['nuis_age'] - df_filtered['true_age'], yerr=df_filtered['nuis_age_err'],
+        df_filtered['true_age'], df_filtered['age_median'] - df_filtered['true_age'], yerr=df_filtered['age_err'],
         fmt='o', color='red', alpha=0.4, capsize=0, markersize=3
     )
     ax2.errorbar(

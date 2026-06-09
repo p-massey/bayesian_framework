@@ -27,7 +27,7 @@ def run_binned_comparison():
     df['age_bin'] = pd.cut(df['true_age'], bins=bin_edges)
     
     # 3. Calculate Binned Statistics
-    df['bias_dyn'] = df['nuis_age'] - df['true_age']
+    df['bias_dyn'] = df['age_median'] - df['true_age']
     df['bias_snid'] = df['bootstrap_age'] - df['true_age']
     
     bin_stats = df.groupby('age_bin', observed=True).agg({
