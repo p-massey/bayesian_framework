@@ -1,6 +1,6 @@
 import json
 
-notebook_path = "/Users/pxm588@student.bham.ac.uk/PhD/bayesian_framework/notebooks/cfa_all_fits_summary.ipynb"
+notebook_path = "/Users/pxm588@student.bham.ac.uk/PhD/bayesian_framework/notebooks/cohort_analysis/cfa_all_fits_summary.ipynb"
 
 cells = []
 
@@ -52,7 +52,7 @@ cells.append({
     "metadata": {},
     "outputs": [],
     "source": [
-        "csv_path = '../data/cfa_fits_results.csv'\n",
+        "csv_path = '../../data/cfa_fits_results.csv'\n",
         "if not os.path.exists(csv_path):\n",
         "    raise FileNotFoundError(f\"Results file not found at {csv_path}. Make sure the fitting script has run and saved results.\")\n",
         "\n",
@@ -121,7 +121,7 @@ cells.append({
         "plt.title('SALT3 Age Recovery for CfA Supernova Spectra', fontsize=14, pad=15)\n",
         "plt.legend(loc='upper left', fontsize=11)\n",
         "plt.tight_layout()\n",
-        "plt.savefig('../outputs/cfa_age_recovery.png', dpi=300)\n",
+        "plt.savefig('../../outputs/cfa_age_recovery.png', dpi=300)\n",
         "plt.show()"
     ]
 })
@@ -153,7 +153,7 @@ cells.append({
         "plt.title('Distribution of Phase Residuals (Spectroscopic - Photometric)', fontsize=14, pad=15)\n",
         "plt.legend(fontsize=11)\n",
         "plt.tight_layout()\n",
-        "plt.savefig('../outputs/cfa_phase_residuals_hist.png', dpi=300)\n",
+        "plt.savefig('../../outputs/cfa_phase_residuals_hist.png', dpi=300)\n",
         "plt.show()"
     ]
 })
@@ -199,7 +199,55 @@ cells.append({
         "plt.ylim(-10, 10)\n",
         "plt.legend(loc='lower left', fontsize=11)\n",
         "plt.tight_layout()\n",
-        "plt.savefig('../outputs/cfa_residuals_vs_phase.png', dpi=300)\n",
+        "plt.savefig('../../outputs/cfa_residuals_vs_phase.png', dpi=300)\n",
+        "plt.show()"
+    ]
+})
+
+# Cell 6b: Plot 3b: Residuals vs Estimated Phase
+cells.append({
+    "cell_type": "code",
+    "execution_count": None,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+        "plt.figure(figsize=(10, 6))\n",
+        "plt.scatter(df_success['phase_est'], df_success['phase_diff'], \n",
+        "            color='#2b5c8f', alpha=0.4, s=20, label='Individual Epochs')\n",
+        "\n",
+        "plt.axhline(0, color='black', linestyle='-', lw=1.5, alpha=0.5)\n",
+        "plt.axhline(1, color='gray', linestyle='--', lw=1, alpha=0.5)\n",
+        "plt.axhline(-1, color='gray', linestyle='--', lw=1, alpha=0.5)\n",
+        "\n",
+        "# Compute binned running median/mean using estimated phase\n",
+        "bins = np.arange(-12, 36, 4)\n",
+        "bin_centers = 0.5 * (bins[:-1] + bins[1:])\n",
+        "binned_mean = []\n",
+        "binned_std = []\n",
+        "\n",
+        "for i in range(len(bins)-1):\n",
+        "    mask_bin = (df_success['phase_est'] >= bins[i]) & (df_success['phase_est'] < bins[i+1])\n",
+        "    if mask_bin.sum() > 2:\n",
+        "        median_val = df_success.loc[mask_bin, 'phase_diff'].median()\n",
+        "        binned_mean.append(median_val)\n",
+        "        # robust scatter\n",
+        "        mad_bin = np.median(np.abs(df_success.loc[mask_bin, 'phase_diff'] - median_val))\n",
+        "        binned_std.append(1.4826 * mad_bin)\n",
+        "    else:\n",
+        "        binned_mean.append(np.nan)\n",
+        "        binned_std.append(np.nan)\n",
+        "\n",
+        "plt.errorbar(bin_centers, binned_mean, yerr=binned_std, fmt='s-', color='#e05a47', \n",
+        "             capsize=4, elinewidth=2, capthick=2, label='Running Binned Median (robust $\\sigma$)')\n",
+        "\n",
+        "plt.xlabel('Derived Spectroscopic Restframe Phase (days)', fontsize=12)\n",
+        "plt.ylabel('Residual: Spectroscopic - Photometric Phase (days)', fontsize=12)\n",
+        "plt.title('Phase residual trends as a function of derived phase', fontsize=14, pad=15)\n",
+        "plt.ylim(-10, 10)\n",
+        "plt.xlim(-15, 38)\n",
+        "plt.legend(loc='lower left', fontsize=11)\n",
+        "plt.tight_layout()\n",
+        "plt.savefig('../../outputs/cfa_residuals_vs_estimated_phase.png', dpi=300)\n",
         "plt.show()"
     ]
 })
@@ -232,7 +280,7 @@ cells.append({
         "plt.title('Goodness of Fit (Reduced $\\chi^2$) vs. Phase', fontsize=14, pad=15)\n",
         "plt.legend(loc='upper right', fontsize=11)\n",
         "plt.tight_layout()\n",
-        "plt.savefig('../outputs/cfa_chi2_vs_phase.png', dpi=300)\n",
+        "plt.savefig('../../outputs/cfa_chi2_vs_phase.png', dpi=300)\n",
         "plt.show()"
     ]
 })
